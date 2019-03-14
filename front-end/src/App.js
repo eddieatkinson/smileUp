@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Test from './containers/Test';
+
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -20,6 +23,7 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <Test />
       </div>
     );
   }
