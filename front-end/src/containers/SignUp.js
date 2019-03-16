@@ -5,6 +5,7 @@ class SignUp extends Component {
     return (
       <div>
         <p>SignUp</p>
+        <a href='/'>To Home</a>
       </div>
     )
   }
