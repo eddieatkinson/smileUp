@@ -3,7 +3,6 @@ import axios from 'axios';
 
 class Home extends Component {
   buttonClicked() {
-    console.log('Clicked!');
     const url = `${window.apiHost}`;
     axios.get(url);
   }
