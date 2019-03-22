@@ -13,6 +13,9 @@ class Home extends Component {
         <p>Home</p>
         <a href='/signup'>To SignUp</a>
         <div>
+          <a href='/register'>To Register</a>
+        </div>
+        <div>
           <button onClick={this.buttonClicked}>Test the backend!</button>
         </div>
       </div>
