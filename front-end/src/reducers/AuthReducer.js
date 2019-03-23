@@ -5,7 +5,6 @@ export default function(state = [], action) {
     case LOGIN_ACTION:
       return action.payload;
     case REGISTER_ACTION:
-      console.log(action.payload);
       return action.payload;
     default:
       return state;
