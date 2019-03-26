@@ -50,4 +50,16 @@ router.post('/signup', function(req, res) {
   });
 });
 
+router.get('/volunteerinfo', (req, res) => {
+  console.log('You hit /volunteerinfo!!');
+  const selectionQuery = `SELECT * FROM volunteers`;
+  connection.query(selectionQuery, [], (error, results) => {
+    if (error) {
+      throw error;
+    } else {
+      res.json(results);
+    }
+  });
+});
+
 module.exports = router;
