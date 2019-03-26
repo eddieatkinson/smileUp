@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import { TableHead, TableRow, TableCell, Paper, TableBody } from '@material-ui/core';
+import moment from 'moment';
 
 import GetVolunteerInfo from '../actions/GetVolunteerInfo';
 
@@ -23,20 +24,26 @@ class VolunteerTable extends Component {
                 <TableCell>First Name</TableCell>
                 <TableCell>Last Name</TableCell>
                 <TableCell>Birthday</TableCell>
+                <TableCell>Age</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Phone</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.props.volunteerInfo.map(volunteer => (
-                <TableRow key={volunteer.id}>
-                  <TableCell>{volunteer.firstName}</TableCell>
-                  <TableCell>{volunteer.lastName}</TableCell>
-                  <TableCell>{volunteer.birthday}</TableCell>
-                  <TableCell>{volunteer.email}</TableCell>
-                  <TableCell>{volunteer.phone}</TableCell>
-                </TableRow>
-              ))}
+              {this.props.volunteerInfo.map(volunteer => {
+                const birthdayFormatted = moment(volunteer.birthday).format('LL');
+                const age = moment().diff(volunteer.birthday, 'years');
+                return (
+                  <TableRow key={volunteer.id}>
+                    <TableCell>{volunteer.firstName}</TableCell>
+                    <TableCell>{volunteer.lastName}</TableCell>
+                    <TableCell>{birthdayFormatted}</TableCell>
+                    <TableCell>{age}</TableCell>
+                    <TableCell>{volunteer.email}</TableCell>
+                    <TableCell>{volunteer.phone}</TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </Paper>
