@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 const bcrypt = require('bcrypt-nodejs');
+const randToken = require('rand-token');
 const config = require('../config/config');
 
 const connection = mysql.createConnection(config);
@@ -46,6 +47,40 @@ router.post('/signup', function(req, res) {
       res.json({
         msg: 'signUpVolunteerSuccess',
       });
+    }
+  });
+});
+
+router.post('/signin', function(req, res) {
+  console.log('You hit /signin!!');
+  console.log(req.body);
+  const { email, password } = req.body;
+  const checkUser = `SELECT * FROM users
+    WHERE email = ?`;
+  connection.query(checkUser, [email], (error, results) => {
+    if (error) {
+      throw error;
+    } else if (results.length === 0) {
+      res.json({
+        msg: 'badLogin',
+      });
+    } else {
+      const checkHash = bcrypt.compareSync(password, results[0].password);
+      if (checkHash) {
+        const token = randToken.uid(60);
+        const name = results[0].firstName;
+        const status = results[0].status;
+        res.json({
+          msg: 'signInSuccess',
+          token,
+          name,
+          status,
+        });
+      } else {
+        res.json({
+          msg: 'badPassword',
+        });
+      }
     }
   });
 });

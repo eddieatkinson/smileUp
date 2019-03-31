@@ -5,6 +5,7 @@ import Home from './containers/Home';
 import SignUp from './containers/SignUp';
 import Register from './containers/Register';
 import VolunteerTable from './containers/VolunteerTable';
+import SignIn from './containers/SignIn';
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
         <div>
           <Route exact path='/' component={Home} />
           <Route path='/signup' component={SignUp} />
+          <Route path='/signin' component={SignIn} />
           <Route path='/register' component={Register} />
           <Route path='/volunteers' component={VolunteerTable} />
         </div>
