@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { emailCheck } from '../utilities';
 import SignUpAction from '../actions/SignUpAction';
@@ -34,7 +35,7 @@ class SignUp extends Component {
     return (
       <div>
         <p>SignUp</p>
-        <a href='/'>To Home</a>
+        <Link to='/'>Home</Link>
         <form>
           <input onChange={(event) => this.handleFieldChange(event, 'firstName')} type='text' placeholder='First Name' />
           <input onChange={(event) => this.handleFieldChange(event, 'lastName')} type='text' placeholder='Last Name' />

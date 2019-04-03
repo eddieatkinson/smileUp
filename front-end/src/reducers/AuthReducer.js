@@ -1,13 +1,13 @@
-import { LOGIN_ACTION, REGISTER_ACTION, SIGN_IN_ACTION } from '../types';
+import { REGISTER_ACTION, SIGN_IN_ACTION, LOGOUT_ACTION } from '../types';
 
 export default function(state = [], action) {
   switch(action.type) {
-    case LOGIN_ACTION:
-      return action.payload;
     case REGISTER_ACTION:
       return action.payload;
     case SIGN_IN_ACTION:
-      return action.payload;
+      return action.payload.data;
+    case LOGOUT_ACTION:
+      return [];
     default:
       return state;
   }

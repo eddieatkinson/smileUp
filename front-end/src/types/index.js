@@ -1,4 +1,4 @@
-export const LOGIN_ACTION = 'LOGIN_ACTION';
+export const LOGOUT_ACTION = 'LOGOUT_ACTION';
 export const REGISTER_ACTION = 'REGISTER_ACTION';
 export const SIGN_IN_ACTION = 'SIGN_IN_ACTION';
 export const SIGN_UP_ACTION = 'SIGN_UP_ACTION'; // volunteer sign-up

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { emailCheck } from '../utilities';
@@ -41,7 +42,7 @@ class SignIn extends Component {
     return (
       <div>
         <p>SignIn</p>
-        <a href='/'>To Home</a>
+        <Link to='/'>To Home</Link>
         <form>
           <input onChange={(event) => this.handleFieldChange(event, 'email')} type='email' placeholder='Email' />
           <input onChange={(event) => this.handleFieldChange(event, 'password')} type='password' placeholder='Password' />

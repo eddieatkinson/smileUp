@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { emailCheck } from '../utilities';
@@ -35,7 +36,7 @@ class Register extends Component {
     return (
       <div>
         <p>Register</p>
-        <a href='/'>To Home</a>
+        <Link to='/'>To Home</Link>
         <div>
           <form>
             <input onChange={(event) => this.handleFieldChange(event, 'name')} placeholder='Name' type='text' />
