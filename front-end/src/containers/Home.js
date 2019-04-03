@@ -1,32 +1,51 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import LogoutAction from '../actions/LogoutAction';
 
 class Home extends Component {
   buttonClicked() {
-    const url = `${window.apiHost}`;
-    axios.get(url);
+    this.props.LogoutAction();
+  }
+
+  renderLogoutButton() {
+    if (this.props.auth.token){
+      return (
+        <button onClick={this.buttonClicked.bind(this)}>Logout</button>
+      )
+    }
+    return null;
   }
 
   render() {
     return (
       <div>
         <p>Home</p>
-        <a href='/signup'>To SignUp</a>
+        <Link to='/signup'>To SignUp</Link>
         <div>
-          <a href='/register'>To Register</a>
+          <Link to='/register'>To Register</Link>
         </div>
         <div>
-          <a href='/signin'>To SignIn</a>
+          <Link to='/signin'>To SignIn</Link>
         </div>
         <div>
-          <a href='/volunteers'>To VolunteerTable</a>
+          <Link to='/volunteers'>To VolunteerTable</Link>
         </div>
         <div>
-          <button onClick={this.buttonClicked}>Test the backend!</button>
+          {this.renderLogoutButton()}
         </div>
       </div>
     )
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+  }
+}
+
+export default connect(mapStateToProps, {
+  LogoutAction,
+})(Home);

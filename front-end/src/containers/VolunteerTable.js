@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import { TableHead, TableRow, TableCell, Paper, TableBody } from '@material-ui/core';
 import moment from 'moment';
@@ -14,7 +15,7 @@ class VolunteerTable extends Component {
     return (
       <div>
         <div>
-          <a href='/'>Home</a>
+          <Link to='/'>Home</Link>
         </div>
         VolunteerTable
         <Paper>
@@ -54,6 +55,7 @@ class VolunteerTable extends Component {
 
 const mapStateToProps = state => {
   return {
+    auth: state.auth,
     volunteerInfo: state.volunteerInfo,
   }
 }
