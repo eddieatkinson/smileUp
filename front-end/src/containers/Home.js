@@ -7,6 +7,7 @@ import LogoutAction from '../actions/LogoutAction';
 class Home extends Component {
   buttonClicked() {
     this.props.LogoutAction();
+    localStorage.removeItem('smileUpToken');
   }
 
   renderLogoutButton() {
