@@ -7,7 +7,8 @@ import RegisterAction from '../actions/RegisterAction';
 
 class Register extends Component {
   state = {
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -20,9 +21,9 @@ class Register extends Component {
 
   }
   handleSubmit(event) {
-    const { name, email, password, confirmPassword } = this.state;
+    const { firstName, lastName, email, password, confirmPassword } = this.state;
     event.preventDefault();
-    if (name === '' || password === '') {
+    if (firstName === '' || lastName === '' || password === '') {
       alert('All fields must be filled.');
     } else if (!email.match(emailCheck)) {
       alert('Please enter a valid email.');
@@ -39,7 +40,8 @@ class Register extends Component {
         <Link to='/'>To Home</Link>
         <div>
           <form>
-            <input onChange={(event) => this.handleFieldChange(event, 'name')} placeholder='Name' type='text' />
+            <input onChange={(event) => this.handleFieldChange(event, 'firstName')} placeholder='First Name' type='text' />
+            <input onChange={(event) => this.handleFieldChange(event, 'lastName')} placeholder='Last Name' type='text' />
             <input onChange={(event) => this.handleFieldChange(event, 'email')} placeholder='Email' type='email' />
             <input onChange={(event) => this.handleFieldChange(event, 'password')} placeholder='Password' type='password' />
             <input onChange={(event) => this.handleFieldChange(event, 'confirmPassword')} placeholder='Confirm Password' type='password' />
