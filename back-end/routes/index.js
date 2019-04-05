@@ -17,12 +17,13 @@ router.get('/', function(req, res, next) {
 router.post('/register', function(req, res) {
   console.log('You hit /register!!');
   console.log(req.body);
-  const { name, email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
   const hash = bcrypt.hashSync(password);
-  const insertUser = `INSERT INTO users (name, email, password) 
+  const uid = randToken.uid(60);
+  const insertUser = `INSERT INTO users (firstName, lastName, email, password, uid) 
 		VALUES 
-    (?,?,?);`;
-  connection.query(insertUser, [name, email, hash], (error, results) => {
+    (?,?,?,?, ?);`;
+  connection.query(insertUser, [firstName, lastName, email, hash, uid], (error) => {
     if (error) {
       throw error;
     } else {
