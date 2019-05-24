@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { yellow, teal } from '../utilities';
+
 import LogoutAction from '../actions/LogoutAction';
 
 class Home extends Component {
@@ -22,6 +24,8 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <div style={{backgroundColor: yellow, height: 100}}></div>
+        <div style={{backgroundColor: teal, height: 100}}></div>
         <p>Home</p>
         <Link to='/signup'>To SignUp</Link>
         <div>
