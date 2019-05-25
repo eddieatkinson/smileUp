@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { yellow, teal } from '../utilities';
+import { teal } from '../utilities';
+
+import Navbar from '../components/Navbar';
 
 import LogoutAction from '../actions/LogoutAction';
 
@@ -24,7 +26,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div style={{backgroundColor: yellow, height: 100}}></div>
+        <Navbar />
         <div style={{backgroundColor: teal, height: 100}}></div>
         <p>Home</p>
         <Link to='/signup'>To SignUp</Link>
