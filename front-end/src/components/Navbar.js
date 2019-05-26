@@ -26,7 +26,7 @@ const styles = {
 function Navbar(props) {
   return (
     <Grid style={styles.container}>
-      <Link to='/' style={styles.links}><img src={logo} alt='logo' style={styles.image} /></Link>
+      <Link to='/signup' style={styles.links}><img src={logo} alt='logo' style={styles.image} /></Link>
       <Link to='/' style={styles.links}>I'm Here To...</Link>
       <Link to='/' style={styles.links}>Ambassador Program</Link>
       <Link to='/' style={styles.links}>Testimonials</Link>
