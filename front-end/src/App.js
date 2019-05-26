@@ -20,6 +20,10 @@ class App extends Component {
           <Route path='/signin' component={SignIn} />
           <Route path='/register' component={Register} />
           <Route path='/volunteers' component={VolunteerTable} />
+          <Route path='/facebook' component={() => { 
+            window.location.href = 'https://www.facebook.com/smileupfoundation'; 
+            return null;
+          }}/>
         </Grid>
       </Router>
     );
