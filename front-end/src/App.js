@@ -8,6 +8,8 @@ import SignUp from './containers/SignUp';
 import Register from './containers/Register';
 import VolunteerTable from './containers/VolunteerTable';
 import SignIn from './containers/SignIn';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 class App extends Component {
 
@@ -15,6 +17,7 @@ class App extends Component {
     return (
       <Router>
         <Grid>
+          <Navbar />
           <Route exact path='/' component={Home} />
           <Route path='/signup' component={SignUp} />
           <Route path='/signin' component={SignIn} />
@@ -24,6 +27,7 @@ class App extends Component {
             window.location.href = 'https://www.facebook.com/smileupfoundation'; 
             return null;
           }}/>
+          <Footer />
         </Grid>
       </Router>
     );

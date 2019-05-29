@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-
 import LogoutAction from '../actions/LogoutAction';
 
 class Home extends Component {
@@ -25,7 +22,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar />
         <p>Home</p>
         <Link to='/signup'>To SignUp</Link>
         <div>
@@ -40,7 +36,6 @@ class Home extends Component {
         <div>
           {this.renderLogoutButton()}
         </div>
-        <Footer />
       </div>
     )
   }
