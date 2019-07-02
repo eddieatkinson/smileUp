@@ -6,8 +6,15 @@
   align-items: center;
 }
 
+
 .text-block {
   margin: 75px 225px;
+}
+
+@media only screen and (max-width: 900px) {
+  .text-block {
+    margin: 15px 15px;
+  }
 }
 
 h1 {
@@ -34,4 +41,23 @@ p {
 .fb-link {
   text-decoration: none;
   color: #009999;
+}
+
+.quotes {
+  margin: auto;
+  font-family: Quicksand;
+  font-size: 36px;
+  text-align: center;
+  width: 60%;
+}
+
+@media only screen and (max-width: 900px) {
+  .quotes {
+    font-size: 24px;
+    width: 100%;
+  }
+}
+
+.citation {
+  font-size: 20px;
 }

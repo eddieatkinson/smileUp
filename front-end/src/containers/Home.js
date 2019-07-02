@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import mainSmiles from '../assets/main-smiles.jpg';
 
 import LogoutAction from '../actions/LogoutAction';
+import Quotes from '../components/Quotes';
 
 class Home extends Component {
   buttonClicked() {
@@ -51,6 +52,7 @@ class Home extends Component {
             To see how we have been making an impact, visit and join our <Link className='fb-link' to='/facebook' target='_blank'>Facebook page!</Link> 
           </p>
         </div>
+        <Quotes />
       </div>
     )
   }
