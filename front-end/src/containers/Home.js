@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import mainSmiles from '../assets/main-smiles.jpg';
+import home1 from '../assets/home1.jpg';
+import home2 from '../assets/home2.jpg';
+import home3 from '../assets/home3.jpg';
 
 import LogoutAction from '../actions/LogoutAction';
 import Quotes from '../components/Quotes';
@@ -51,6 +54,17 @@ class Home extends Component {
             sometimes your SMILE can be the source of your joy!"<br /><br /> 
             To see how we have been making an impact, visit and join our <Link className='fb-link' to='/facebook' target='_blank'>Facebook page!</Link> 
           </p>
+        </div>
+        <div className='home-images'>
+          <div>
+            <img src={home1} alt='image1' />
+          </div>
+          <div>
+            <img src={home2} alt='image2' />
+          </div>
+          <div>
+            <img src={home3} alt='image3' />
+          </div>
         </div>
         <Quotes />
       </div>

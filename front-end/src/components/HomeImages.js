@@ -2,14 +2,11 @@ import React from 'react';
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-const naturalSlideWidth = window.innerWidth < 900 ? 100 : 6;
-const naturalSlideHeight = window.innerWidth < 900 ? 100: 1;
-
-function Quotes() {
+function HomeImages() {
   return (
     <CarouselProvider
-      naturalSlideHeight={naturalSlideHeight}
-      naturalSlideWidth={naturalSlideWidth}
+      naturalSlideHeight={1}
+      naturalSlideWidth={6}
       totalSlides={2}
       isPlaying
     >
@@ -35,4 +32,4 @@ function Quotes() {
   );
 }
 
-export default Quotes;
+export default HomeImages;
