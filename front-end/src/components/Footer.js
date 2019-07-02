@@ -25,7 +25,8 @@ const styles = {
 
 function Footer(props) {
   return (
-    <div style={styles.container}>
+    // <div style={styles.container}>
+    <div className='container'>
       <div style={styles.copyright}>&copy; 2019 SmileUp! Charitable Foundation is a 501(c)3 non-profit organization</div>
       <div>
         <Link to='/facebook' target='_blank'><img src={facebookIcon} alt='Facebook icon' style={styles.facebook} /></Link>
