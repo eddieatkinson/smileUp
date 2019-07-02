@@ -5,3 +5,33 @@
   justify-content: center;
   align-items: center;
 }
+
+.text-block {
+  margin: 75px 225px;
+}
+
+h1 {
+  font-weight: 400;
+  margin-bottom: 50;
+}
+
+p {
+  line-height: 2;
+}
+
+/* Home page */
+.home-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.home-text {
+  font-family: Quicksand;
+}
+
+.fb-link {
+  text-decoration: none;
+  color: #009999;
+}
