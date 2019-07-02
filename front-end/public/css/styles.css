@@ -43,6 +43,19 @@ p {
   color: #009999;
 }
 
+.home-images {
+  display: flex;
+  margin: 75px 0;
+}
+
+.home-images div {
+  flex: 33.33%;
+}
+
+.home-images div img {
+  width: 100%;
+}
+
 .quotes {
   margin: auto;
   font-family: Quicksand;
