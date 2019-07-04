@@ -62,7 +62,7 @@ function Navbar(){
         <MenuItem><Link to='/signup' style={styles.menuLinks}>Volunteer</Link></MenuItem>
         <MenuItem><Link to='/signup' style={styles.menuLinks}>Learn More</Link></MenuItem>
       </Menu> */}
-      <Link to='/' style={styles.links}>About Us</Link>
+      <Link to='/about' style={styles.links}>About Us</Link>
       <Link to='/' style={styles.links}>Who We Are</Link>
       <Link to='/' style={styles.links}>Events</Link>
       <Link to='/' style={styles.links}>How to Give Back</Link>
