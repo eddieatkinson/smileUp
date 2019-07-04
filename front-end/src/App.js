@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 
 import Home from './containers/Home';
+import About from './components/About';
 import SignUp from './containers/SignUp';
 import Register from './containers/Register';
 import VolunteerTable from './containers/VolunteerTable';
@@ -19,6 +20,7 @@ class App extends Component {
         <Grid>
           <Navbar />
           <Route exact path='/' component={Home} />
+          <Route path='/about' component={About} />
           <Route path='/signup' component={SignUp} />
           <Route path='/signin' component={SignIn} />
           <Route path='/register' component={Register} />

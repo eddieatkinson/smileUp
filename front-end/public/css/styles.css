@@ -38,6 +38,10 @@ p {
   font-family: Quicksand;
 }
 
+.home-text div {
+  margin: 50px 0;
+}
+
 .fb-link {
   text-decoration: none;
   color: #009999;
