@@ -31,9 +31,9 @@ function Dropdown() {
     <div ref={node} style={{position: "relative"}}>
       <div className='give-back-dropdown' style={styles.links} onClick={handleClick}>How to Give Back</div>
       <div id='give-back-items'>
-        <Link className='dropdown-items' to='/'><div>Donate</div></Link>
-        <Link className='dropdown-items' to='/'><div>Volunteer</div></Link>
-        <Link className='dropdown-items' to='/'><div>Sponsor</div></Link>
+        <Link className='dropdown-items' to='/donate'><div>Donate</div></Link>
+        <Link className='dropdown-items' to='/signup'><div>Volunteer</div></Link>
+        <Link className='dropdown-items' to='/sponsor'><div>Sponsor</div></Link>
       </div>
     </div>
   );

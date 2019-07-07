@@ -105,4 +105,37 @@ p {
 .dropdown-items {
   text-decoration: none;
 }
- 
+
+/* Donate */
+.donate-container {
+  display: flex;
+}
+
+.donate-image {
+  flex: 5;
+}
+
+.donate-image img {
+  width: 100%;
+}
+
+.donate-text-container {
+  flex: 3;
+  position: relative;
+}
+
+.donate-text {
+  padding: 50px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.donate-link {
+  text-decoration: none;
+  color: #444;
+}
+
+.amazon {
+  margin-bottom: 100px;
+}
