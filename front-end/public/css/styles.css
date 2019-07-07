@@ -78,3 +78,64 @@ p {
 .citation {
   font-size: 20px;
 }
+
+.give-back-dropdown {
+  cursor: pointer;
+}
+
+#give-back-items {
+  position: absolute;
+  visibility: hidden;
+  top: 80px;
+  left: 45px;
+}
+
+#give-back-items div {
+  padding: 20px;
+  background-color: rgba(255,255,255, 0.75);
+  color: black;
+  text-decoration: none;
+}
+
+#give-back-items div:hover {
+  background-color: #009999E6;
+  color: white;
+}
+
+.dropdown-items {
+  text-decoration: none;
+}
+
+/* Donate */
+.donate-container {
+  display: flex;
+}
+
+.donate-image {
+  flex: 5;
+}
+
+.donate-image img {
+  width: 100%;
+}
+
+.donate-text-container {
+  flex: 3;
+  position: relative;
+}
+
+.donate-text {
+  padding: 50px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.donate-link {
+  text-decoration: none;
+  color: #444;
+}
+
+.amazon {
+  margin-bottom: 100px;
+}
