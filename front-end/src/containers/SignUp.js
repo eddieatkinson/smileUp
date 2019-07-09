@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import moment from 'moment';
 
 import { emailCheck } from '../utilities';
 import SignUpAction from '../actions/SignUpAction';
+import { teal } from '../utilities';
 
 const inputLabelProps = {
   shrink: true,
@@ -19,11 +21,24 @@ class SignUp extends Component {
     email: '',
     phone: '',
     zip: '',
+    guardianName: '',
+    school: '',
+    showChildFields: false,
   }
   handleFieldChange(event, field) {
     const { value } = event.target;
     this.setState({
       [field]: value,
+    });
+    if (field === 'birthday') {
+      this.addParentSchoolFields(value);
+    }
+  }
+  addParentSchoolFields(birthday) {
+    const age = moment().diff(birthday, 'years');
+    const showChildFields = age < 18;
+    this.setState({
+      showChildFields,
     });
   }
   handleSubmit(event) {
@@ -37,7 +52,34 @@ class SignUp extends Component {
       this.props.SignUpAction(this.state);
     }
   }
+  getParentFields() {
+    if (this.state.showChildFields) {
+      return (
+        <div>
+          <TextField
+            style={{marginRight: 10}}
+            variant='outlined'
+            margin='normal'
+            onChange={(event) => this.handleFieldChange(event, 'guardianName')}
+            type='text'
+            label='Guardian Name'
+            InputLabelProps={inputLabelProps}
+          />
+          <TextField
+            variant='outlined'
+            margin='normal'
+            onChange={(event) => this.handleFieldChange(event, 'school')}
+            type='text'
+            label='School'
+            InputLabelProps={inputLabelProps}
+          />
+        </div>
+      );
+    }
+    return null;
+  }
   render() {
+    console.log(this.state.showChildFields);
     return (
       <div className='text-block'>
         <div style={{fontFamily: 'Quicksand'}}>
@@ -46,7 +88,7 @@ class SignUp extends Component {
           <p style={{color: '#0092b3', marginBottom: 50}}>SmileUp! GEORGIA - Cherokee County</p>
           <p>
             If you would like to register your son or daughter (ages 3-17) as a volunteer with SmileUp!, please fill out the form with the names and birth 
-            dates of your children in the "message" section. Also include your zip code. GROUPS: If you would like to sign up an entire youth group (Girl 
+            dates of your children. Also include your zip code. GROUPS: If you would like to sign up an entire youth group (Girl 
             Scouts, sports team, school group, etc.), provide contact information for Group Leader with number of children in the group plus their age 
             ranges in "message" section.
           </p>
@@ -55,6 +97,7 @@ class SignUp extends Component {
           <div style={{flex: 1, marginRight: 10}}>
             <form>
               <TextField
+                style={{marginRight: 10}}
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'firstName')}
@@ -71,6 +114,7 @@ class SignUp extends Component {
                 InputLabelProps={inputLabelProps}
               />
               <TextField
+                style={{marginRight: 10, width: 195}}
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'birthday')}
@@ -86,7 +130,9 @@ class SignUp extends Component {
                 label='Email'
                 InputLabelProps={inputLabelProps}
               />
+              {this.getParentFields()}
               <TextField
+                style={{marginRight: 10}}
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'phone')}
@@ -103,16 +149,22 @@ class SignUp extends Component {
                 InputLabelProps={inputLabelProps}
               />
               <TextField
+                style={{width: 400}}
                 variant='outlined'
                 margin='normal'
-                fullWidth
                 onChange={(event) => this.handleFieldChange(event, 'zip')}
                 type='text'
                 label='Message'
                 InputLabelProps={inputLabelProps}
                 multiline
               />
-              <Button onClick={this.handleSubmit.bind(this)} type='submit'>Sign me up!</Button>
+              <Button
+                style={{backgroundColor: teal, color: 'white'}}
+                onClick={this.handleSubmit.bind(this)}
+                type='submit'
+              >
+                Sign me up!
+              </Button>
             </form>
           </div>
           <div style={{flex: 1}}>
