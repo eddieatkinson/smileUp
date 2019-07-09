@@ -23,6 +23,7 @@ class SignUp extends Component {
     zip: '',
     guardianName: '',
     school: '',
+    message: '',
     showChildFields: false,
   }
   handleFieldChange(event, field) {
@@ -79,7 +80,6 @@ class SignUp extends Component {
     return null;
   }
   render() {
-    console.log(this.state.showChildFields);
     return (
       <div className='text-block'>
         <div style={{fontFamily: 'Quicksand'}}>
@@ -152,7 +152,7 @@ class SignUp extends Component {
                 style={{width: 400}}
                 variant='outlined'
                 margin='normal'
-                onChange={(event) => this.handleFieldChange(event, 'zip')}
+                onChange={(event) => this.handleFieldChange(event, 'message')}
                 type='text'
                 label='Message'
                 InputLabelProps={inputLabelProps}

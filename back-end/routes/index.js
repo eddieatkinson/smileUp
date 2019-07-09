@@ -37,11 +37,11 @@ router.post('/register', function(req, res) {
 router.post('/signup', function(req, res) {
   console.log('You hit /signup!!');
   console.log(req.body);
-  const { firstName, lastName, birthday, email, phone, zip } = req.body;
-  const insertUser = `INSERT INTO volunteers (firstName, lastName, birthday, email, phone, zip) 
+  const { firstName, lastName, birthday, email, phone, zip, guardianName, school, message } = req.body;
+  const insertUser = `INSERT INTO volunteers (firstName, lastName, birthday, email, phone, zip, guardianName, school, message) 
 		VALUES 
-    (?,?,?,?,?,?);`;
-  connection.query(insertUser, [firstName, lastName, birthday, email, phone, zip], (error) => {
+    (?,?,?,?,?,?,?,?,?);`;
+  connection.query(insertUser, [firstName, lastName, birthday, email, phone, zip, guardianName, school, message], (error) => {
     if (error) {
       throw error;
     } else {
