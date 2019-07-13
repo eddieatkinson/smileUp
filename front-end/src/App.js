@@ -14,6 +14,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Donate from './components/Donate';
 import Sponsor from './components/Sponsor';
+import Testimonials from './components/Testimonials';
 
 class App extends Component {
   scrollToBottom() {
@@ -36,6 +37,7 @@ class App extends Component {
           }} />
           <Route path='/donate' component={Donate} />
           <Route path='/sponsor' component={Sponsor} />
+          <Route path='/testimonials' component={Testimonials} />
           <Route path='/paypal' component={() => {
             window.location.href = 'https://www.paypal.com/us/fundraiser/charity/1851712';
             return null;
