@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -15,12 +16,14 @@ import Donate from './components/Donate';
 import Sponsor from './components/Sponsor';
 
 class App extends Component {
-
+  scrollToBottom() {
+    scroll.scrollToBottom();
+  }
   render() {
     return (
       <Router>
         <Grid>
-          <Navbar />
+          <Navbar scrollToBottom={this.scrollToBottom} />
           <Route exact path='/' component={Home} />
           <Route path='/about' component={About} />
           <Route path='/signup' component={SignUp} />
