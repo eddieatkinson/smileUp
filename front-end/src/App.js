@@ -30,7 +30,7 @@ class App extends Component {
           <Route path='/facebook' component={() => { 
             window.location.href = 'https://www.facebook.com/smileupfoundation'; 
             return null;
-          }}/>
+          }} />
           <Route path='/donate' component={Donate} />
           <Route path='/sponsor' component={Sponsor} />
           <Route path='/paypal' component={() => {

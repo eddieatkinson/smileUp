@@ -8,6 +8,7 @@ import home3 from '../assets/home3.jpg';
 
 import LogoutAction from '../actions/LogoutAction';
 import Quotes from '../components/Quotes';
+import Contact from '../components/Contact';
 
 class Home extends Component {
   buttonClicked() {
@@ -67,6 +68,7 @@ class Home extends Component {
           </div>
         </div>
         <Quotes />
+        <Contact />
       </div>
     )
   }
