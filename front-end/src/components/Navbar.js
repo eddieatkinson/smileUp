@@ -39,8 +39,8 @@ function Navbar(props){
       {/* <Link to='/' style={styles.links}>Who We Are</Link> */}
       <Link to='/' style={styles.links}>Events</Link>
       <Dropdown />
-      <Link to='/' style={styles.links}>Testimonials</Link>
-      <div onClick={props.scrollToBottom} style={styles.links}>Contact Us</div>
+      <Link to='/testimonials' style={styles.links}>Testimonials</Link>
+      <Link to='/' onClick={props.scrollToBottom} style={styles.links}>Contact Us</Link>
     </Grid>
   );
 }
