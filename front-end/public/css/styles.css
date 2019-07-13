@@ -106,6 +106,14 @@ p {
   text-decoration: none;
 }
 
+.contact-container {
+  overflow: auto;
+  background-color: #3F3F3F;
+  color: white;
+  margin: auto;
+  text-align: center;
+}
+
 /* Donate */
 .donate-container {
   display: flex;

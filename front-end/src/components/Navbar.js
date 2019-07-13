@@ -18,6 +18,7 @@ const styles = {
     margin: 50,
     textDecoration: 'none',
     color: 'white',
+    cursor: 'pointer',
   },
   menuLinks: {
     margin: 50,
@@ -29,7 +30,8 @@ const styles = {
   },
 }
 
-function Navbar(){
+function Navbar(props){
+  console.log(props);
   return (
     <Grid style={styles.container}>
       <Link to='/' style={styles.links}><img src={logo} alt='logo' style={styles.image} /></Link>
@@ -38,7 +40,7 @@ function Navbar(){
       <Link to='/' style={styles.links}>Events</Link>
       <Dropdown />
       <Link to='/' style={styles.links}>Testimonials</Link>
-      <Link to='/' style={styles.links}>Contact Us</Link>
+      <div onClick={props.scrollToBottom} style={styles.links}>Contact Us</div>
     </Grid>
   );
 }
