@@ -29,20 +29,6 @@ class Home extends Component {
     return (
       <div>
         <img className='home-image' src={mainSmiles} alt='smiling children' />
-        {/* <p>Home</p>
-        <Link to='/signup'>To SignUp</Link>
-        <div>
-          <Link to='/register'>To Register</Link>
-        </div>
-        <div>
-          <Link to='/signin'>To SignIn</Link>
-        </div>
-        <div>
-          <Link to='/volunteers'>To VolunteerTable</Link>
-        </div>
-        <div>
-          {this.renderLogoutButton()}
-        </div> */}
         <div className='text-block home-text'>
           <h1>Welcome to the SmileUp! Charitable Foundation!</h1>
           <p>

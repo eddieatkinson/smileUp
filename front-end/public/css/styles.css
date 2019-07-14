@@ -6,7 +6,6 @@
   align-items: center;
 }
 
-
 .text-block {
   margin: 75px 225px;
 }
@@ -34,7 +33,7 @@ p {
   width: 50%;
 }
 
-.home-text {
+.home-text, .about-container {
   font-family: Quicksand;
 }
 
@@ -183,4 +182,33 @@ p {
   font-size: 18px;
   font-weight: 700;
   font-style: italic;
+}
+
+/* About */
+.who {
+  display: flex;
+}
+
+.who-image {
+  flex: 1;
+}
+
+.who-image img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.who-text {
+  flex: 1;
+  padding: 0 30px;
+}
+
+.about-text {
+  padding: 0 225px;
+}
+
+@media only screen and (max-width: 900px) {
+  .about-text {
+    padding: 15px 15px;
+  }
 }
