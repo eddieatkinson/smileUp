@@ -91,13 +91,13 @@ p {
 
 #give-back-items div {
   padding: 20px;
-  background-color: rgba(255,255,255, 0.75);
+  background-color: rgba(255,255,255, 0.95);
   color: black;
   text-decoration: none;
 }
 
 #give-back-items div:hover {
-  background-color: #009999E6;
+  background-color: #009999F6;
   color: white;
 }
 
