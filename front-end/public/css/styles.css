@@ -212,3 +212,50 @@ p {
     padding: 15px 15px;
   }
 }
+
+/* Events */
+.events-container {
+  font-family: Quicksand;
+}
+
+.events-container h1 {
+  font-weight: 700;
+}
+
+.events-row {
+  display: flex;
+  margin-top: 30px;
+}
+
+.event {
+  flex: 33.33%;
+  margin: 0 20px;
+}
+
+.event img {
+  width: 100%;
+  height: 300px;
+  object-fit: scale-down;
+}
+
+.event h2 {
+  margin: 0;
+}
+
+.event-link {
+  text-decoration: none;
+  color: #009999;
+}
+
+.past-events {
+  background-color: #ffcc00;
+  overflow: auto;
+  color: #009999;
+}
+
+.past-photos {
+  font-size: 20px;
+  font-style: italic;
+  text-decoration: none;
+  color: black;
+}

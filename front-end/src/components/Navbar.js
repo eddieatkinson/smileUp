@@ -37,7 +37,7 @@ function Navbar(props){
       <Link to='/' style={styles.links}><img src={logo} alt='logo' style={styles.image} /></Link>
       <Link to='/about' style={styles.links}>About Us</Link>
       {/* <Link to='/' style={styles.links}>Who We Are</Link> */}
-      <Link to='/' style={styles.links}>Events</Link>
+      <Link to='/events' style={styles.links}>Events</Link>
       <Dropdown />
       <Link to='/testimonials' style={styles.links}>Testimonials</Link>
       <Link to='/' onClick={props.scrollToBottom} style={styles.links}>Contact Us</Link>
