@@ -259,3 +259,34 @@ p {
   text-decoration: none;
   color: black;
 }
+
+/* Sponsor */
+.sponsor-first {
+  margin-bottom: 75px;
+}
+
+#table-head {
+  font-size: 40px;
+}
+
+.yellow-row {
+  background-color: #ffcc00;
+}
+
+#sponsor-table {
+  width: 100%;
+}
+
+#sponsor-table th {
+  background-color: #009999;
+  color: white;
+}
+
+#sponsor-table td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+#sponsor-table tr:nth-child(even) {
+  background-color: #ffcc00;
+}
