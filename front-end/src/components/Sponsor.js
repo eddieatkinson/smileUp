@@ -2,7 +2,7 @@ import React from 'react';
 
 function Sponsor() {
   return (
-    <div className='text-block'>
+    <div className='text-block sponsor-container'>
       <div className='sponsor-first'>
         <h1>Sponsorship Opportunities per Event</h1>
         <p>
@@ -41,8 +41,15 @@ function Sponsor() {
             <td>$250</td>
           </tr>
           <tr>
-            <td>In-Kind</td>
-            <td>$5,000</td>
+            <td colSpan='2'>In-Kind</td>
+          </tr>
+          <tr>
+            <td id='in-kind-text' colSpan='2'>
+              Sponsorship benefits for in-kind donations will be based upon a 2-to-1 ratio compared with 
+              the standard cash sponsorship fees. For example, an in-kind donation valued at $5,000 would 
+              receive the sponsorship benefit offered to a $2,500 cash sponsor.<br /><br />
+              <span>** Any sponsorship outside of an event will receive benefits at next event closest to date of donation.</span>
+            </td>
           </tr>
         </table>
       </div>

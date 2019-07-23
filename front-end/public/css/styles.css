@@ -33,7 +33,7 @@ p {
   width: 50%;
 }
 
-.home-text, .about-container {
+.home-text, .about-container, .sponsor-container {
   font-family: Quicksand;
 }
 
@@ -274,19 +274,42 @@ p {
 }
 
 #sponsor-table {
-  width: 100%;
+  margin: auto;
+  width: 80%;
+  border-collapse: collapse; 
 }
 
 #sponsor-table th {
+  font-size: 24px;
   background-color: #009999;
   color: white;
 }
 
 #sponsor-table td, th {
+  font-size: 20px;
   text-align: left;
+  width: 50%;
   padding: 8px;
+}
+
+#sponsor-table #in-kind-text {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 #sponsor-table tr:nth-child(even) {
   background-color: #ffcc00;
+}
+
+#sponsor-table tr:last-child {
+  background-color: #ffcc00;
+}
+
+#sponsor-table td:first-child {
+  font-weight: bolder;
+}
+
+#in-kind-text span {
+  font-size: 14px;
+  font-style: italic;
 }
