@@ -31,7 +31,6 @@ const styles = {
 }
 
 function Navbar(props){
-  console.log(props);
   return (
     <Grid style={styles.container}>
       <Link to='/' style={styles.links}><img src={logo} alt='logo' style={styles.image} /></Link>
