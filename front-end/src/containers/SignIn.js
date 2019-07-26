@@ -53,6 +53,7 @@ class SignIn extends Component {
     return errorMessage;
   }
   render() {
+    console.log(this.props.auth);
     return (
       <div>
         <p>SignIn</p>

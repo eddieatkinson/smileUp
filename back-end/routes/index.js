@@ -70,12 +70,12 @@ router.post('/signin', function(req, res) {
       if (checkHash) {
         const token = randToken.uid(60);
         const name = results[0].firstName;
-        const status = results[0].status;
+        const statusId = results[0].statusId;
         res.json({
           msg: 'signInSuccess',
           token,
           name,
-          status,
+          statusId,
         });
       } else {
         res.json({

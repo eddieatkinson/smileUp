@@ -12,6 +12,7 @@ class VolunteerTable extends Component {
     this.props.GetVolunteerInfo();
   }
   render() {
+    console.log(this.props);
     return (
       <div>
         <div>
