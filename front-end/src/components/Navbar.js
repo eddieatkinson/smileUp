@@ -24,6 +24,11 @@ const styles = {
     color: 'white',
     cursor: 'pointer',
   },
+  tonya: {
+    margin: 50,
+    textDecoration: 'none',
+    color: 'white',
+  },
   menuLinks: {
     margin: 50,
     textDecoration: 'none',
@@ -63,7 +68,7 @@ class Navbar extends Component {
     }
     return (
       <div style={styles.container}>
-        <div style={styles.links}>
+        <div style={styles.tonya}>
           {`Hey, ${auth.name}!`}
         </div>
         <Link style={styles.links} to='/volunteers'>Volunteers</Link>

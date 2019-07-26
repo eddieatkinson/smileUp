@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import { TableHead, TableRow, TableCell, Paper, TableBody } from '@material-ui/core';
 import moment from 'moment';
+import Delete from '@material-ui/icons/Delete';
 import { isEmpty } from 'lodash';
 
 import GetVolunteerInfo from '../actions/GetVolunteerInfo';
@@ -13,11 +14,16 @@ class VolunteerTable extends Component {
     this.props.GetVolunteerInfo();
   }
 
+  deleteVolunteer(id) {
+    console.log(id)
+  }
+
   renderTable() {
-    // if(isEmpty(this.props.auth)){
-    //   this.props.history.push('/');
-    //   return null;
-    // }
+    if(isEmpty(this.props.auth)){
+      this.props.history.push('/');
+      return null;
+    }
+
     return (
       <div className='text-block'>
         <Paper>
@@ -30,6 +36,7 @@ class VolunteerTable extends Component {
                 <TableCell>Age</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Phone</TableCell>
+                <TableCell>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -44,6 +51,7 @@ class VolunteerTable extends Component {
                     <TableCell>{age}</TableCell>
                     <TableCell>{volunteer.email}</TableCell>
                     <TableCell>{volunteer.phone}</TableCell>
+                    <TableCell><Delete className='delete-volunteer' onClick={() => this.deleteVolunteer(volunteer.id)} /></TableCell>
                   </TableRow>
                 );
               })}
