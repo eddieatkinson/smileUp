@@ -70,12 +70,12 @@ router.post('/signin', function(req, res) {
       if (checkHash) {
         const token = randToken.uid(60);
         const name = results[0].firstName;
-        const status = results[0].status;
+        const statusId = results[0].statusId;
         res.json({
           msg: 'signInSuccess',
           token,
           name,
-          status,
+          statusId,
         });
       } else {
         res.json({
@@ -88,14 +88,37 @@ router.post('/signin', function(req, res) {
 
 router.get('/volunteerinfo', (req, res) => {
   console.log('You hit /volunteerinfo!!');
-  const selectionQuery = `SELECT * FROM volunteers`;
-  connection.query(selectionQuery, [], (error, results) => {
+  const selectionQuery = `SELECT * FROM volunteers
+    WHERE deleted = ?`;
+  connection.query(selectionQuery, [0], (error, results) => {
     if (error) {
       throw error;
     } else {
       res.json(results);
     }
   });
+});
+
+router.post('/deletevolunteer', (req, res) => {
+  const { id } = req.body;
+  const updateQuery = `UPDATE volunteers
+    SET deleted = ?
+    WHERE id = ?;`;
+  connection.query(updateQuery, [1, id], (error, results) => {
+    if (error) {
+      throw error;
+    } else {
+      const selectionQuery = `SELECT * FROM volunteers
+        WHERE deleted = ?`;
+      connection.query(selectionQuery, [0], (error, results) => {
+        if (error) {
+          throw error;
+        } else {
+          res.json(results);
+        }
+      });
+    }
+  })
 });
 
 module.exports = router;

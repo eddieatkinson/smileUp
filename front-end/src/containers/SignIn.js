@@ -36,6 +36,7 @@ class SignIn extends Component {
       alert('Please enter a valid email.');
     } else {
       await this.props.SignInAction(this.state);
+      this.props.history.push('/volunteers');
       if (staySignedIn) {
         this.storeToken();
       }
@@ -53,6 +54,7 @@ class SignIn extends Component {
     return errorMessage;
   }
   render() {
+    console.log(this.props.auth);
     return (
       <div>
         <p>SignIn</p>

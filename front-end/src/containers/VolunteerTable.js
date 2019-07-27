@@ -4,20 +4,30 @@ import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import { TableHead, TableRow, TableCell, Paper, TableBody } from '@material-ui/core';
 import moment from 'moment';
+import Delete from '@material-ui/icons/Delete';
+import { isEmpty } from 'lodash';
 
 import GetVolunteerInfo from '../actions/GetVolunteerInfo';
+import DeleteVolunteerAction from '../actions/DeleteVolunteerAction';
 
 class VolunteerTable extends Component {
   componentDidMount() {
     this.props.GetVolunteerInfo();
   }
-  render() {
+
+  deleteVolunteer(id) {
+    console.log(id);
+    this.props.DeleteVolunteerAction({id});
+  }
+
+  renderTable() {
+    if(isEmpty(this.props.auth)){
+      this.props.history.push('/');
+      return null;
+    }
+
     return (
-      <div>
-        <div>
-          <Link to='/'>Home</Link>
-        </div>
-        VolunteerTable
+      <div className='text-block'>
         <Paper>
           <Table>
             <TableHead>
@@ -28,6 +38,7 @@ class VolunteerTable extends Component {
                 <TableCell>Age</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Phone</TableCell>
+                <TableCell>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -42,6 +53,7 @@ class VolunteerTable extends Component {
                     <TableCell>{age}</TableCell>
                     <TableCell>{volunteer.email}</TableCell>
                     <TableCell>{volunteer.phone}</TableCell>
+                    <TableCell><Delete className='delete-volunteer' onClick={() => this.deleteVolunteer(volunteer.id)} /></TableCell>
                   </TableRow>
                 );
               })}
@@ -49,6 +61,13 @@ class VolunteerTable extends Component {
           </Table>
         </Paper>
       </div>
+    )
+  }
+
+  render() {
+    console.log(this.props);
+    return (
+      <div>{this.renderTable()}</div>
     )
   }
 }
@@ -62,4 +81,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   GetVolunteerInfo,
+  DeleteVolunteerAction,
 })(VolunteerTable);
