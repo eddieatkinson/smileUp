@@ -372,3 +372,44 @@ p {
 .delete-volunteer {
   cursor: pointer;
 }
+
+/* Sign-in */
+.signin-logo-container {
+  /* align-content: center; */
+}
+
+.signin-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+}
+
+.signin-form {
+  width: 50%;
+  margin: 50px auto;
+  /* margin-bottom: 50px; */
+  align-items: center;
+}
+
+.signin-label-container {
+  align-items: center;
+}
+
+.signin-person-logo {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.signin-label {
+  font-size: 30px;
+  font-family: Quicksand;
+  text-align: center;
+}
+
+.signin-error-container {
+  color: red;
+  float: right;
+  margin-right: 50px;
+}

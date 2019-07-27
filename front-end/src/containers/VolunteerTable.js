@@ -9,6 +9,7 @@ import { isEmpty } from 'lodash';
 
 import GetVolunteerInfo from '../actions/GetVolunteerInfo';
 import DeleteVolunteerAction from '../actions/DeleteVolunteerAction';
+import { badLogin } from '../utilities';
 
 class VolunteerTable extends Component {
   componentDidMount() {
@@ -21,7 +22,7 @@ class VolunteerTable extends Component {
   }
 
   renderTable() {
-    if(isEmpty(this.props.auth)){
+    if(isEmpty(this.props.auth) || this.props.auth.msg === badLogin){
       this.props.history.push('/');
       return null;
     }
