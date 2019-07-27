@@ -71,7 +71,6 @@ class Navbar extends Component {
         <div style={styles.tonya}>
           {`Hey, ${auth.name}!`}
         </div>
-        <Link style={styles.links} to='/volunteers'>Volunteers</Link>
         <div style={styles.links} onClick={this.logoutAction.bind(this)}>Logout</div>
       </div>
     )

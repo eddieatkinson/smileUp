@@ -8,6 +8,7 @@ import Delete from '@material-ui/icons/Delete';
 import { isEmpty } from 'lodash';
 
 import GetVolunteerInfo from '../actions/GetVolunteerInfo';
+import DeleteVolunteerAction from '../actions/DeleteVolunteerAction';
 
 class VolunteerTable extends Component {
   componentDidMount() {
@@ -15,7 +16,8 @@ class VolunteerTable extends Component {
   }
 
   deleteVolunteer(id) {
-    console.log(id)
+    console.log(id);
+    this.props.DeleteVolunteerAction({id});
   }
 
   renderTable() {
@@ -79,4 +81,5 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   GetVolunteerInfo,
+  DeleteVolunteerAction,
 })(VolunteerTable);

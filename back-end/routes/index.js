@@ -88,14 +88,37 @@ router.post('/signin', function(req, res) {
 
 router.get('/volunteerinfo', (req, res) => {
   console.log('You hit /volunteerinfo!!');
-  const selectionQuery = `SELECT * FROM volunteers`;
-  connection.query(selectionQuery, [], (error, results) => {
+  const selectionQuery = `SELECT * FROM volunteers
+    WHERE deleted = ?`;
+  connection.query(selectionQuery, [0], (error, results) => {
     if (error) {
       throw error;
     } else {
       res.json(results);
     }
   });
+});
+
+router.post('/deletevolunteer', (req, res) => {
+  const { id } = req.body;
+  const updateQuery = `UPDATE volunteers
+    SET deleted = ?
+    WHERE id = ?;`;
+  connection.query(updateQuery, [1, id], (error, results) => {
+    if (error) {
+      throw error;
+    } else {
+      const selectionQuery = `SELECT * FROM volunteers
+        WHERE deleted = ?`;
+      connection.query(selectionQuery, [0], (error, results) => {
+        if (error) {
+          throw error;
+        } else {
+          res.json(results);
+        }
+      });
+    }
+  })
 });
 
 module.exports = router;
