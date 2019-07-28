@@ -11,6 +11,10 @@ import Quotes from '../components/Quotes';
 import Contact from '../components/Contact';
 
 class Home extends Component {
+  state = {
+    keystrokes: '',
+  }
+
   buttonClicked() {
     this.props.LogoutAction();
     localStorage.removeItem('smileUpToken');
@@ -23,6 +27,28 @@ class Home extends Component {
       )
     }
     return null;
+  }
+
+  detectKeys(event) {
+    const newKeystrokes = this.state.keystrokes + event.key;
+    this.setState({
+      keystrokes: newKeystrokes,
+    });
+    const name = 'tonya';
+    if (this.state.keystrokes.toLowerCase().includes(name)) {
+      this.setState({
+        keystrokes: ''
+      });
+      this.props.history.push('/signin');
+    }
+  }
+
+  componentDidMount(){
+    document.addEventListener("keydown", this.detectKeys.bind(this));
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.detectKeys.bind(this));
   }
 
   render() {
