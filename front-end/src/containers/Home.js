@@ -9,8 +9,13 @@ import home3 from '../assets/home3.jpg';
 import LogoutAction from '../actions/LogoutAction';
 import Quotes from '../components/Quotes';
 import Contact from '../components/Contact';
+import { secretName } from '../utilities';
 
 class Home extends Component {
+  state = {
+    keystrokes: '',
+  }
+
   buttonClicked() {
     this.props.LogoutAction();
     localStorage.removeItem('smileUpToken');
@@ -23,6 +28,28 @@ class Home extends Component {
       )
     }
     return null;
+  }
+
+  detectKeys(event) {
+    const newKeystrokes = this.state.keystrokes + event.key;
+    this.setState({
+      keystrokes: newKeystrokes,
+    });
+    const name = secretName;
+    if (this.state.keystrokes.toLowerCase().includes(name)) {
+      this.setState({
+        keystrokes: ''
+      });
+      this.props.history.push('/signin');
+    }
+  }
+
+  componentDidMount(){
+    document.addEventListener("keydown", this.detectKeys.bind(this));
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.detectKeys.bind(this));
   }
 
   render() {
