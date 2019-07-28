@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 
-import { emailCheck } from '../utilities';
+import { emailCheck, badLogin, teal, badPassword, signInSuccess } from '../utilities';
 import SignInAction from '../actions/SignInAction';
+
+const inputLabelProps = {
+  shrink: true,
+};
 
 class SignIn extends Component {
   state = {
@@ -36,7 +42,9 @@ class SignIn extends Component {
       alert('Please enter a valid email.');
     } else {
       await this.props.SignInAction(this.state);
-      this.props.history.push('/volunteers');
+      if (this.props.auth.msg === signInSuccess) {
+        this.props.history.push('/volunteers');
+      }
       if (staySignedIn) {
         this.storeToken();
       }
@@ -45,28 +53,52 @@ class SignIn extends Component {
   renderErrorMessage() {
     let errorMessage = '';
     if(this.props.auth) {
-      if (this.props.auth.msg === 'badPassword') {
+      if (this.props.auth.msg === badPassword) {
         errorMessage = 'Incorrect password';
-      } else if (this.props.auth.msg === 'badLogin') {
+      } else if (this.props.auth.msg === badLogin) {
         errorMessage = 'Incorrect email';
       }
     }
     return errorMessage;
   }
   render() {
-    console.log(this.props.auth);
     return (
-      <div>
-        <p>SignIn</p>
-        <Link to='/'>To Home</Link>
-        <form>
-          <input onChange={(event) => this.handleFieldChange(event, 'email')} type='email' placeholder='Email' />
-          <input onChange={(event) => this.handleFieldChange(event, 'password')} type='password' placeholder='Password' />
-          <input id='keepSignedOn' onClick={this.handleRadioButtonCheck.bind(this)} type='radio' value={false} />
-          <label>Keep me signed in</label>
-          <button onClick={this.handleSubmit.bind(this)} type='submit'>Sign me in!</button>
+      <div className='signin-container'>
+        <form className='signin-form'>
+          <div className='signin-label-container'>
+            <Icon className='signin-person-logo'>person</Icon>
+            <div className='signin-label'>Sign In</div>
+          </div>
+          <TextField
+            onChange={(event) => this.handleFieldChange(event, 'email')}
+            type='email'
+            label='Email'
+            variant='outlined'
+            margin='normal'
+            fullWidth
+            InputLabelProps={inputLabelProps}
+          />
+          <TextField
+            onChange={(event) => this.handleFieldChange(event, 'password')}
+            type='password'
+            label='Password'
+            variant='outlined'
+            margin='normal'
+            fullWidth
+            InputLabelProps={inputLabelProps}
+          />
+          {/* <TextField id='keepSignedOn' onClick={this.handleRadioButtonCheck.bind(this)} type='radio' value={false} />
+          <label>Keep me signed in</label> */}
+          <div className='signin-error-container'>{this.renderErrorMessage()}</div>
+          <Button
+            onClick={this.handleSubmit.bind(this)}
+            variant='contained'
+            type='submit'
+            style={{color: 'white', backgroundColor: teal, marginTop: 10}}
+          >
+            Sign me in!
+          </Button>
         </form>
-        <div>{this.renderErrorMessage()}</div>
       </div>
     )
   }
