@@ -9,6 +9,7 @@ import home3 from '../assets/home3.jpg';
 import LogoutAction from '../actions/LogoutAction';
 import Quotes from '../components/Quotes';
 import Contact from '../components/Contact';
+import { secretName } from '../utilities';
 
 class Home extends Component {
   state = {
@@ -34,7 +35,7 @@ class Home extends Component {
     this.setState({
       keystrokes: newKeystrokes,
     });
-    const name = 'tonya';
+    const name = secretName;
     if (this.state.keystrokes.toLowerCase().includes(name)) {
       this.setState({
         keystrokes: ''
