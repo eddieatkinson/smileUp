@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { yellow, badLogin } from '../utilities';
+import { yellow, signInSuccess } from '../utilities';
 import Grid from '@material-ui/core/Grid';
 import { isEmpty } from 'lodash';
 
@@ -53,8 +53,7 @@ class Navbar extends Component {
 
   logoutButton() {
     const { auth } = this.props;
-    if(isEmpty(auth) || auth.msg === badLogin) {
-      console.log('nothing!');
+    if(isEmpty(auth) || auth.msg !== signInSuccess) {
       return (
         <div style={styles.container}>
           <Link to='/' style={styles.links}><img src={logo} alt='logo' style={styles.image} /></Link>

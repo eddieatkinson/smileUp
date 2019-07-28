@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Person from '@material-ui/icons/Person';
 import Icon from '@material-ui/core/Icon';
 
-import { emailCheck, badLogin, teal, badPassword } from '../utilities';
+import { emailCheck, badLogin, teal, badPassword, signInSuccess } from '../utilities';
 import SignInAction from '../actions/SignInAction';
-import logo from '../assets/logo-donate.jpg';
 
 const inputLabelProps = {
   shrink: true,
@@ -44,7 +42,7 @@ class SignIn extends Component {
       alert('Please enter a valid email.');
     } else {
       await this.props.SignInAction(this.state);
-      if (this.props.auth.msg !== badLogin) {
+      if (this.props.auth.msg === signInSuccess) {
         this.props.history.push('/volunteers');
       }
       if (staySignedIn) {
@@ -57,19 +55,15 @@ class SignIn extends Component {
     if(this.props.auth) {
       if (this.props.auth.msg === badPassword) {
         errorMessage = 'Incorrect password';
-      } else if (this.props.auth.msg === 'badLogin') {
+      } else if (this.props.auth.msg === badLogin) {
         errorMessage = 'Incorrect email';
       }
     }
     return errorMessage;
   }
   render() {
-    console.log(this.props.auth);
     return (
-      <div>
-        <div className='signin-logo-container'>
-          {/* <img className='signin-logo' src={logo} alt='logo' /> */}
-        </div>
+      <div className='signin-container'>
         <form className='signin-form'>
           <div className='signin-label-container'>
             <Icon className='signin-person-logo'>person</Icon>
@@ -100,7 +94,7 @@ class SignIn extends Component {
             onClick={this.handleSubmit.bind(this)}
             variant='contained'
             type='submit'
-            style={{color: 'white', backgroundColor: teal}}
+            style={{color: 'white', backgroundColor: teal, marginTop: 10}}
           >
             Sign me in!
           </Button>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import { TableHead, TableRow, TableCell, Paper, TableBody } from '@material-ui/core';
 import moment from 'moment';
@@ -9,7 +8,7 @@ import { isEmpty } from 'lodash';
 
 import GetVolunteerInfo from '../actions/GetVolunteerInfo';
 import DeleteVolunteerAction from '../actions/DeleteVolunteerAction';
-import { badLogin } from '../utilities';
+import { signInSuccess } from '../utilities';
 
 class VolunteerTable extends Component {
   componentDidMount() {
@@ -17,12 +16,11 @@ class VolunteerTable extends Component {
   }
 
   deleteVolunteer(id) {
-    console.log(id);
     this.props.DeleteVolunteerAction({id});
   }
 
   renderTable() {
-    if(isEmpty(this.props.auth) || this.props.auth.msg === badLogin){
+    if(isEmpty(this.props.auth) || this.props.auth.msg !== signInSuccess){
       this.props.history.push('/');
       return null;
     }
@@ -66,7 +64,6 @@ class VolunteerTable extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>{this.renderTable()}</div>
     )
