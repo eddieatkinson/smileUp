@@ -113,6 +113,12 @@ p {
   text-align: center;
 }
 
+/* Loading */
+.loading-screen {
+  height: 70vh;
+  position: relative;
+}
+
 /* Donate */
 .donate-container {
   display: flex;

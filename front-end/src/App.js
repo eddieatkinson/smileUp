@@ -16,11 +16,13 @@ import Donate from './components/Donate';
 import Sponsor from './components/Sponsor';
 import Testimonials from './components/Testimonials';
 import Events from './components/Events';
+import Redirecting from './components/Redirecting';
 
 class App extends Component {
   scrollToBottom() {
     scroll.scrollToBottom();
   }
+
   render() {
     return (
       <Router>
@@ -35,26 +37,36 @@ class App extends Component {
           <Route path='/volunteers' component={VolunteerTable} />
           <Route path='/facebook' component={() => { 
             window.location.href = 'https://www.facebook.com/smileupfoundation'; 
-            return null;
+            return (
+              <Redirecting />
+            );
           }} />
           <Route path='/donate' component={Donate} />
           <Route path='/sponsor' component={Sponsor} />
           <Route path='/testimonials' component={Testimonials} />
           <Route path='/paypal' component={() => {
             window.location.href = 'https://www.paypal.com/us/fundraiser/charity/1851712';
-            return null;
+            return (
+              <Redirecting />
+            );
           }}/>
           <Route path='/amazon' component={() => {
             window.location.href = 'https://smile.amazon.com/ch/58-2396294';
-            return null;
+            return (
+              <Redirecting />
+            );
           }}/>
           <Route path='/5k' component={() => {
             window.location.href = 'https://www.active.com/canton-ga/running/distance-running-races/8th-annual-bend-your-knees-5k-run-walk-2019?int=';
-            return null;
+            return (
+              <Redirecting />
+            );
           }}/>
           <Route path='/past-photos' component={() => {
             window.location.href = 'https://www.facebook.com/pg/smileupfoundation/photos/?tab=albums';
-            return null;
+            return (
+              <Redirecting />
+            );
           }}/>
           <Footer />
         </Grid>
