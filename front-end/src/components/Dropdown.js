@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { map } from 'lodash';
 
 const styles = {
   links: {
@@ -9,7 +10,8 @@ const styles = {
   },
 }
 
-function Dropdown() {
+function Dropdown(props) {
+  const { image, dropdownTitle, dropdownItems } = props;
   const node = useRef();
   useEffect(() => {
     document.addEventListener('mousedown', handleClick);
@@ -30,11 +32,13 @@ function Dropdown() {
   return (
     <div style={{position: "relative"}}>
       <div ref={node}>
-        <div className='give-back-dropdown' style={styles.links} onClick={handleClick}>How to Give Back</div>
+        <div className='give-back-dropdown' style={styles.links} onClick={handleClick}>
+          {image || dropdownTitle}
+        </div>
         <div id='give-back-items'>
-          <Link className='dropdown-items' to='/donate'><div>Donate</div></Link>
-          <Link className='dropdown-items' to='/signup'><div>Volunteer</div></Link>
-          <Link className='dropdown-items' to='/sponsor'><div>Sponsor</div></Link>
+          {
+            map(dropdownItems, (info) => <Link className='dropdown-items' key={info.path} to={info.path}><div>{info.text}</div></Link>)
+          }
         </div>
       </div>
     </div>

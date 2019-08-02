@@ -10,7 +10,7 @@
   margin: 75px 225px;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1224px) {
   .text-block {
     margin: 15px 15px;
   }
@@ -67,7 +67,7 @@ p {
   width: 60%;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1224px) {
   .quotes {
     font-size: 24px;
     width: 100%;
@@ -213,7 +213,7 @@ p {
   padding: 0 225px;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1224px) {
   .about-text {
     padding: 15px 15px;
   }
