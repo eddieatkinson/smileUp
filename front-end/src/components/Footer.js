@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { teal } from '../utilities';
 
 import facebookIcon from '../assets/facebook.png';
@@ -28,7 +27,7 @@ function Footer(props) {
     <div className='container'>
       <div style={styles.copyright}>&copy; 2019 SmileUp! Charitable Foundation is a 501(c)3 non-profit organization</div>
       <div>
-        <Link to='/facebook' target='_blank'><img src={facebookIcon} alt='Facebook icon' style={styles.facebook} /></Link>
+        <a href='https://www.facebook.com/smileupfoundation' target='_blank' rel="noopener noreferrer"><img src={facebookIcon} alt='Facebook icon' style={styles.facebook} /></a>
       </div>
     </div>
   )
