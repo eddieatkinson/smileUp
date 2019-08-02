@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { yellow, signInSuccess } from '../utilities';
+import { teal, yellow, signInSuccess } from '../utilities';
 import Grid from '@material-ui/core/Grid';
 import { isEmpty } from 'lodash';
+import MediaQuery from 'react-responsive';
+import Reorder from '@material-ui/icons/Reorder';
 
 import logo from '../assets/logo.gif';
 import Dropdown from './Dropdown';
@@ -39,6 +41,12 @@ const styles = {
   },
 }
 
+const getImage = () => {
+  return (
+      <Reorder style={{fontSize: 60, color: teal}} />
+  )
+}
+
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -53,15 +61,61 @@ class Navbar extends Component {
 
   logoutButton() {
     const { auth } = this.props;
+    const dropdownTitle = 'How to Give Back';
+    const dropdownItemsLarge = [
+      {
+        path: '/donate',
+        text: 'Donate',
+      },
+      {
+        path: '/signup',
+        text: 'Volunteer',
+      },
+      {
+        path: '/sponsor',
+        text: 'Sponsor',
+      },
+    ]
+    const dropdownItemsSmall = [
+      {
+        path: '/about',
+        text: 'About Us',
+      },
+      {
+        path: '/events',
+        text: 'Events',
+      },
+      {
+        path: '/donate',
+        text: 'Donate',
+      },
+      {
+        path: '/signup',
+        text: 'Volunteer',
+      },
+      {
+        path: '/sponsor',
+        text: 'Sponsor',
+      },
+      {
+        path: '/testimonials',
+        text: 'Testimonials',
+      },
+    ]
     if(isEmpty(auth) || auth.msg !== signInSuccess) {
       return (
         <div style={styles.container}>
           <Link to='/' style={styles.links}><img src={logo} alt='logo' style={styles.image} /></Link>
-          <Link to='/about' style={styles.links}>About Us</Link>
-          <Link to='/events' style={styles.links}>Events</Link>
-          <Dropdown />
-          <Link to='/testimonials' style={styles.links}>Testimonials</Link>
-          <Link to='/' onClick={this.state.scrollToBottom} style={styles.links}>Contact Us</Link>
+          <MediaQuery query='(min-width: 1224px)'>
+            <Link to='/about' style={styles.links}>About Us</Link>
+            <Link to='/events' style={styles.links}>Events</Link>
+            <Dropdown dropdownTitle={dropdownTitle} dropdownItems={dropdownItemsLarge} />
+            <Link to='/testimonials' style={styles.links}>Testimonials</Link>
+            <Link to='/' onClick={this.state.scrollToBottom} style={styles.links}>Contact Us</Link>
+          </MediaQuery>
+          <MediaQuery query='(max-width:1223px)'>
+            <Dropdown image={getImage()} dropdownItems={dropdownItemsSmall} />
+          </MediaQuery>
         </div>
       );
     }
