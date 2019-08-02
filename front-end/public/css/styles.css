@@ -146,7 +146,7 @@ p {
 
 .donate-link {
   text-decoration: none;
-  color: #444;
+  color: #009999;
 }
 
 .amazon {
@@ -254,7 +254,7 @@ p {
 }
 
 .past-events {
-  background-color: #ffcc00;
+  background-color: #ffcc0080;
   overflow: auto;
   color: #009999;
 }
