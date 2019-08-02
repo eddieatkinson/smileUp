@@ -12,8 +12,8 @@ function Events() {
         <div className='events-row'>
           <div className='event'>
             <img src={upcoming1} alt='Event cover' />
-            <a className='event-link' href='https://www.active.com/canton-ga/running/distance-running-races/8th-annual-bend-your-knees-5k-run-walk-2019?int=' target='_blank' rel="noopener noreferrer"><h2>Collins Dixon Bend Your Knees 5K</h2></a>
-            <p>Saturday, July 20, 2019</p>
+            <h2>Eagle Watch Chili Cookoff</h2>
+            <p>Sunday, November 10, 2019</p>
           </div>
           <div className='event'>
             <img src={upcoming2} alt='Event cover' />
