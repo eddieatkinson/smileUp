@@ -16,7 +16,6 @@ import Donate from './components/Donate';
 import Sponsor from './components/Sponsor';
 import Testimonials from './components/Testimonials';
 import Events from './components/Events';
-import Redirecting from './components/Redirecting';
 
 class App extends Component {
   scrollToBottom() {
@@ -35,39 +34,9 @@ class App extends Component {
           <Route path='/signin' component={SignIn} />
           <Route path='/register' component={Register} />
           <Route path='/volunteers' component={VolunteerTable} />
-          <Route path='/facebook' component={() => { 
-            window.location.href = 'https://www.facebook.com/smileupfoundation'; 
-            return (
-              <Redirecting />
-            );
-          }} />
           <Route path='/donate' component={Donate} />
           <Route path='/sponsor' component={Sponsor} />
           <Route path='/testimonials' component={Testimonials} />
-          <Route path='/paypal' component={() => {
-            window.location.href = 'https://www.paypal.com/us/fundraiser/charity/1851712';
-            return (
-              <Redirecting />
-            );
-          }}/>
-          <Route path='/amazon' component={() => {
-            window.location.href = 'https://smile.amazon.com/ch/58-2396294';
-            return (
-              <Redirecting />
-            );
-          }}/>
-          <Route path='/5k' component={() => {
-            window.location.href = 'https://www.active.com/canton-ga/running/distance-running-races/8th-annual-bend-your-knees-5k-run-walk-2019?int=';
-            return (
-              <Redirecting />
-            );
-          }}/>
-          <Route path='/past-photos' component={() => {
-            window.location.href = 'https://www.facebook.com/pg/smileupfoundation/photos/?tab=albums';
-            return (
-              <Redirecting />
-            );
-          }}/>
           <Footer />
         </Grid>
       </Router>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import mainSmiles from '../assets/main-smiles.jpg';
 import home1 from '../assets/home1.jpg';
@@ -66,7 +65,7 @@ class Home extends Component {
             work with volunteers, donors and SmileUp! Ambassadors to bring joy, restore hope, and provide purpose to every child we
             come into contact with, in hopes to fulfill our organization's motto: "Sometimes your joy is the source of your SMILE, but
             sometimes your SMILE can be the source of your joy!"<br /><br /> 
-            To see how we have been making an impact, visit and join our <Link className='fb-link' to='/facebook' target='_blank'>Facebook page!</Link> 
+            To see how we have been making an impact, visit and join our <a className='fb-link' href='https://www.facebook.com/smileupfoundation' target='_blank' rel="noopener noreferrer">Facebook page!</a> 
           </p>
         </div>
         <div className='home-images'>

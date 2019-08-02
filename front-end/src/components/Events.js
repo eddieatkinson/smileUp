@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import upcoming1 from '../assets/upcoming1.jpg';
 import upcoming2 from '../assets/upcoming2.jpg';
@@ -13,7 +12,7 @@ function Events() {
         <div className='events-row'>
           <div className='event'>
             <img src={upcoming1} alt='Event cover' />
-            <Link className='event-link' to='/5k' target='_blank'><h2>Collins Dixon Bend Your Knees 5K</h2></Link>
+            <a className='event-link' href='https://www.active.com/canton-ga/running/distance-running-races/8th-annual-bend-your-knees-5k-run-walk-2019?int=' target='_blank' rel="noopener noreferrer"><h2>Collins Dixon Bend Your Knees 5K</h2></a>
             <p>Saturday, July 20, 2019</p>
           </div>
           <div className='event'>
@@ -30,7 +29,7 @@ function Events() {
       </div>
       <div className='past-events'>
         <div className='text-block'>
-          <h1>Past SmileUp! Events <Link className='past-photos' to='/past-photos' target='_blank'>(click here to see photos)</Link></h1>
+          <h1>Past SmileUp! Events <a className='past-photos' href='https://www.facebook.com/pg/smileupfoundation/photos/?tab=albums' target='_blank' rel="noopener noreferrer">(click here to see photos)</a></h1>
         </div>
       </div>
     </div>
