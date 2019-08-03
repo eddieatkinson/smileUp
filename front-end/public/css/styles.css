@@ -10,7 +10,7 @@
   margin: 75px 225px;
 }
 
-@media only screen and (max-width: 1224px) {
+@media only screen and (max-width: 1223px) {
   .text-block {
     margin: 15px 15px;
   }
@@ -67,7 +67,7 @@ p {
   width: 60%;
 }
 
-@media only screen and (max-width: 1224px) {
+@media only screen and (max-width: 1223px) {
   .quotes {
     font-size: 24px;
     width: 100%;
@@ -144,6 +144,19 @@ p {
   transform: translateY(-50%);
 }
 
+@media only screen and (max-width: 1223px) {
+  .donate-container {
+    display: block;
+  }
+  .donate-text {
+    position: relative;
+    transform: none;
+  }
+  .smileup-logo-donate {
+    display: none;
+  }
+}
+
 .donate-link {
   text-decoration: none;
   color: #009999;
@@ -195,7 +208,7 @@ p {
   display: flex;
 }
 
-@media only screen and (max-width: 1224px) {
+@media only screen and (max-width: 1223px) {
   .who {
     display: block;
   }
@@ -219,7 +232,7 @@ p {
   padding: 0 225px;
 }
 
-@media only screen and (max-width: 1224px) {
+@media only screen and (max-width: 1223px) {
   .about-text, .who-text {
     padding: 15px 15px;
   }
@@ -244,7 +257,7 @@ p {
   margin: 0 20px;
 }
 
-@media only screen and (max-width: 1224px) {
+@media only screen and (max-width: 1223px) {
   .events-container h1, .event * {
     text-align: center;
   }
@@ -403,11 +416,6 @@ p {
   width: 30%;
   margin: 50px auto;
   padding: 30px;
-  /* height: calc(100% - 100px); */
-}
-
-.signin-logo-container {
-  /* align-content: center; */
 }
 
 .signin-logo {
@@ -418,8 +426,6 @@ p {
 }
 
 .signin-form {
-  /* width: 50%; */
-  /* margin: 50px auto; */
   margin-bottom: 30px;
   align-items: center;
 }
@@ -427,10 +433,6 @@ p {
 .signin-label-container {
   align-items: center;
   margin: 20px;
-}
-
-.signin-label-container * {
-  /* margin: 20px; */
 }
 
 .signin-person-logo {
