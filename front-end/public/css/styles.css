@@ -201,11 +201,11 @@ p {
     text-align: center;
   }
   .volunteer-form > form > div {
-    margin-right: 10px;
+    margin-right: 0px;
     width: 48%;
   }
   .volunteer-form > form > div:nth-child(7) {
-    width: calc(96% + 10px);
+    width: 96%;
   }
   .volunteer-form {
     margin-bottom: 30px;
