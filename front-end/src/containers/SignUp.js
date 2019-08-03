@@ -92,11 +92,10 @@ class SignUp extends Component {
             ranges in "message" section.
           </p>
         </div>
-        <div style={{display: 'flex'}}>
-          <div style={{flex: 1, marginRight: 10}}>
+        <div className='volunteer-form-with-note'>
+          <div className='volunteer-form'>
             <form>
               <TextField
-                style={{marginRight: 10}}
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'firstName')}
@@ -113,7 +112,6 @@ class SignUp extends Component {
                 InputLabelProps={inputLabelProps}
               />
               <TextField
-                style={{marginRight: 10, width: 195}}
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'birthday')}
@@ -131,7 +129,6 @@ class SignUp extends Component {
               />
               {this.getParentFields()}
               <TextField
-                style={{marginRight: 10}}
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'phone')}
@@ -148,7 +145,6 @@ class SignUp extends Component {
                 InputLabelProps={inputLabelProps}
               />
               <TextField
-                style={{width: 400}}
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'message')}

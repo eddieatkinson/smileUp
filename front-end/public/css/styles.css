@@ -166,9 +166,53 @@ p {
   margin-bottom: 100px;
 }
 
-/* Donate form */
-.volunteer-field {
-  margin: 100px;
+/* Volunteer form */
+.volunteer-form-with-note {
+  display: flex;
+}
+
+.volunteer-form {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.volunteer-text-field {
+  margin-right: 10px;
+}
+
+.volunteer-form > form > div {
+  margin-right: 10px;
+  width: 195px;
+}
+
+.volunteer-form > form > div:nth-child(7) {
+  width: 400px;
+}
+
+.volunteer-form button {
+  display: block;
+}
+
+@media only screen and (max-width: 1223px) {
+  .volunteer-form-with-note {
+    display: block;
+  }
+  .volunteer-form > form {
+    text-align: center;
+  }
+  .volunteer-form > form > div {
+    margin-right: 10px;
+    width: 48%;
+  }
+  .volunteer-form > form > div:nth-child(7) {
+    width: calc(96% + 10px);
+  }
+  .volunteer-form {
+    margin-bottom: 30px;
+  }
+  .volunteer-form button {
+    margin-left: 20px;
+  }
 }
 
 /* Testimonials */
