@@ -10,7 +10,7 @@
   margin: 75px 225px;
 }
 
-@media only screen and (max-width: 1224px) {
+@media only screen and (max-width: 1223px) {
   .text-block {
     margin: 15px 15px;
   }
@@ -67,7 +67,7 @@ p {
   width: 60%;
 }
 
-@media only screen and (max-width: 1224px) {
+@media only screen and (max-width: 1223px) {
   .quotes {
     font-size: 24px;
     width: 100%;
@@ -144,6 +144,19 @@ p {
   transform: translateY(-50%);
 }
 
+@media only screen and (max-width: 1223px) {
+  .donate-container {
+    display: block;
+  }
+  .donate-text {
+    position: relative;
+    transform: none;
+  }
+  .smileup-logo-donate {
+    display: none;
+  }
+}
+
 .donate-link {
   text-decoration: none;
   color: #009999;
@@ -153,9 +166,53 @@ p {
   margin-bottom: 100px;
 }
 
-/* Donate form */
-.volunteer-field {
-  margin: 100px;
+/* Volunteer form */
+.volunteer-form-with-note {
+  display: flex;
+}
+
+.volunteer-form {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.volunteer-text-field {
+  margin-right: 10px;
+}
+
+.volunteer-form > form > div {
+  margin-right: 10px;
+  width: 195px;
+}
+
+.volunteer-form > form > div:nth-child(7) {
+  width: 400px;
+}
+
+.volunteer-form button {
+  display: block;
+}
+
+@media only screen and (max-width: 1223px) {
+  .volunteer-form-with-note {
+    display: block;
+  }
+  .volunteer-form > form {
+    text-align: center;
+  }
+  .volunteer-form > form > div {
+    margin-right: 10px;
+    width: 48%;
+  }
+  .volunteer-form > form > div:nth-child(7) {
+    width: calc(96% + 10px);
+  }
+  .volunteer-form {
+    margin-bottom: 30px;
+  }
+  .volunteer-form button {
+    margin-left: 20px;
+  }
 }
 
 /* Testimonials */
@@ -195,6 +252,12 @@ p {
   display: flex;
 }
 
+@media only screen and (max-width: 1223px) {
+  .who {
+    display: block;
+  }
+}
+
 .who-image {
   flex: 1;
 }
@@ -213,8 +276,8 @@ p {
   padding: 0 225px;
 }
 
-@media only screen and (max-width: 1224px) {
-  .about-text {
+@media only screen and (max-width: 1223px) {
+  .about-text, .who-text {
     padding: 15px 15px;
   }
 }
@@ -236,6 +299,18 @@ p {
 .event {
   flex: 33.33%;
   margin: 0 20px;
+}
+
+@media only screen and (max-width: 1223px) {
+  .events-container h1, .event * {
+    text-align: center;
+  }
+  .events-row {
+    display: block;
+  }
+  .event {
+    margin-bottom: 50px;
+  }
 }
 
 .event img {
@@ -385,11 +460,6 @@ p {
   width: 30%;
   margin: 50px auto;
   padding: 30px;
-  /* height: calc(100% - 100px); */
-}
-
-.signin-logo-container {
-  /* align-content: center; */
 }
 
 .signin-logo {
@@ -400,8 +470,6 @@ p {
 }
 
 .signin-form {
-  /* width: 50%; */
-  /* margin: 50px auto; */
   margin-bottom: 30px;
   align-items: center;
 }
@@ -409,10 +477,6 @@ p {
 .signin-label-container {
   align-items: center;
   margin: 20px;
-}
-
-.signin-label-container * {
-  /* margin: 20px; */
 }
 
 .signin-person-logo {

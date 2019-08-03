@@ -6,7 +6,7 @@ function Donate() {
   return (
     <div>
       <div className='donate-container'>
-        <div className='donate-image'>
+        <div className='donate-image smileup-logo-donate'>
           <img src={logoDonate} alt='SmileUp! logo' />
         </div>
         <div className='donate-text-container'>
@@ -24,7 +24,7 @@ function Donate() {
       </div>
       <div className='donate-container amazon'>
         <div className='donate-image'>
-          <img src={amazon} alt='SmileUp! logo' />
+          <img src={amazon} alt='Amazon logo' />
         </div>
         <div className='donate-text-container'>
           <div className='donate-text'>
