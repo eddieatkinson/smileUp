@@ -24,9 +24,11 @@ function Dropdown(props) {
     const items = document.getElementById('give-back-items');
     if (node.current.contains(event.target)) {
       items.style.visibility = 'visible';
+      alert('IN');
       return;
     }
     items.style.visibility = 'hidden';
+    alert('OUT');
   }
 
   return (
