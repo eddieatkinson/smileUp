@@ -42,7 +42,7 @@ class VolunteerTable extends Component {
             </TableHead>
             <TableBody>
               {this.props.volunteerInfo.map(volunteer => {
-                const birthdayFormatted = moment(volunteer.birthday).format('LL');
+                const birthdayFormatted = moment.utc(volunteer.birthday).format('LL');
                 const age = moment().diff(volunteer.birthday, 'years');
                 return (
                   <TableRow key={volunteer.id}>
