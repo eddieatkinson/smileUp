@@ -124,9 +124,8 @@ class Navbar extends Component {
           </MediaQuery>
           <MediaQuery query='(max-width:1223px)'>
             {/* <Dropdown image={getImage()} dropdownItems={dropdownItemsSmall} /> */}
-            <Reorder onClick={this.changeMenuState} style={{fontSize: 60, color: teal}} />
-            <Menu right isOpen={this.state.menuIsOpen}>
-              <a href='https://www.google.com' target='_blank' rel="noopener noreferrer">This, too</a>
+            {/* <Reorder onClick={this.changeMenuState} style={{fontSize: 60, color: teal}} /> */}
+            <Menu disableAutoFocus right pageWrapId='page-wrap' outerContainerId='App'>
               <Link className='menu-item' to='/about'>About</Link>
               <Link className='menu-item' to='/events'>Events</Link>
               <Link className='menu-item' to='/donate'>Donate</Link>
