@@ -87,6 +87,7 @@ p {
   visibility: hidden;
   top: 80px;
   left: 45px;
+  z-index: 1;
 }
 
 #give-back-items div {
