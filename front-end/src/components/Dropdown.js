@@ -23,9 +23,11 @@ function Dropdown(props) {
   const handleClick = (event) => {
     const items = document.getElementById('give-back-items');
     if (node.current.contains(event.target)) {
+      alert('Clicked in it');
       items.style.visibility = 'visible';
       return;
     }
+    alert('Clicked out of it');
     items.style.visibility = 'hidden';
   }
 

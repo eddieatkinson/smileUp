@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { isEmpty } from 'lodash';
 import MediaQuery from 'react-responsive';
 import Reorder from '@material-ui/icons/Reorder';
+import { slide as Menu } from 'react-burger-menu';
 
 import logo from '../assets/logo.gif';
 import Dropdown from './Dropdown';
@@ -52,11 +53,19 @@ class Navbar extends Component {
     super(props);
     this.state = {
       scrollToBottom: props.scrollToBottom,
+      menuIsOpen: false,
     }
   }
 
   logoutAction() {
     this.props.LogoutAction();
+  }
+
+  changeMenuState() {
+    console.log('Clicked the hamburger');
+    this.setState({
+      menuIsOpen: !this.state.menuIsOpen,
+    });
   }
 
   logoutButton() {
@@ -114,7 +123,17 @@ class Navbar extends Component {
             <Link to='/' onClick={this.state.scrollToBottom} style={styles.links}>Contact Us</Link>
           </MediaQuery>
           <MediaQuery query='(max-width:1223px)'>
-            <Dropdown image={getImage()} dropdownItems={dropdownItemsSmall} />
+            {/* <Dropdown image={getImage()} dropdownItems={dropdownItemsSmall} /> */}
+            <Reorder onClick={this.changeMenuState} style={{fontSize: 60, color: teal}} />
+            <Menu right isOpen={this.state.menuIsOpen}>
+              <a href='https://www.google.com' target='_blank' rel="noopener noreferrer">This, too</a>
+              <Link className='menu-item' to='/about'>About</Link>
+              <Link className='menu-item' to='/events'>Events</Link>
+              <Link className='menu-item' to='/donate'>Donate</Link>
+              <Link className='menu-item' to='/signup'>Volunteer</Link>
+              <Link className='menu-item' to='/sponsor'>Sponsor</Link>
+              <Link className='menu-item' to='/testimonials'>Testimonials</Link>
+            </Menu>
           </MediaQuery>
         </div>
       );
