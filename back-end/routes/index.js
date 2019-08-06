@@ -8,6 +8,28 @@ const config = require('../config/config');
 const connection = mysql.createConnection(config);
 connection.connect();
 
+// Nodemailer
+const nodemailer = require('nodemailer');
+const creds = require('../config/mail');
+
+const transport = {
+  host: 'smtp.gmail.com',
+  auth: {
+    user: creds.USER,
+    pass: creds.PASS,
+  },
+};
+
+const transporter = nodemailer.createTransport(transport);
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Server is ready to take messages');
+  }
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log('You hit it /!!');
@@ -45,6 +67,55 @@ router.post('/signup', function(req, res) {
     if (error) {
       throw error;
     } else {
+      const adminMailContent = `
+        <div>
+          <p>You have a new volunteer!</p>
+          <h1>Volunteer Information:</h1>
+          <ul>
+            <li>Name: ${firstName} ${lastName}</li>
+            <li>Birthday: ${birthday}</li>
+            <li>Email: ${email}</li>
+            <li>Phone: ${phone}</li>
+            <li>Message: ${message}</li>
+          </ul>
+        </div>
+      `;
+      const volunteerMailContent = `
+        <img src='https://smileup.eddiebatkinson.com/static/media/logo-donate.77a366ff.jpg' />
+        <p>Thank you so much for signing up to be a SmileUp! volunteer!</p>
+      `;
+      const mailToAdmin = {
+        from: 'SmileUp! Volunteer Page',
+        to: creds.USER,
+        subject: `New SmileUp! Volunteer: ${firstName} ${lastName}`,
+        html: adminMailContent,
+      };
+      const mailToVolunteer = {
+        from: 'SmileUp!',
+        to: email,
+        subject: `SmileUp! welcomes you!`,
+        html: volunteerMailContent,
+      };
+      transporter.sendMail(mailToAdmin, (err, data) => {
+        if (err) {
+          res.json({
+            msg: 'mailToAdminFail',
+          });
+        } else {
+          transporter.sendMail(mailToVolunteer, (err2, data) => {
+            if (err2) {
+              res.json({
+                msg: 'mailToVolunteerFail',
+              });
+            } else {
+              res.json({
+                msg: 'msgToAdminVolunteerSignUpSuccess',
+              });
+            }
+          });
+        }
+      });
+      console.log('You made it past the first res?');
       res.json({
         msg: 'signUpVolunteerSuccess',
       });
