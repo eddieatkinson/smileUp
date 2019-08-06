@@ -9,6 +9,7 @@ const connection = mysql.createConnection(config);
 connection.connect();
 
 // Nodemailer
+const ejs = require('ejs');
 const nodemailer = require('nodemailer');
 const creds = require('../config/mail');
 
@@ -84,37 +85,69 @@ router.post('/signup', function(req, res) {
         <img src='https://smileup.eddiebatkinson.com/static/media/logo-donate.77a366ff.jpg' />
         <p>Thank you so much for signing up to be a SmileUp! volunteer!</p>
       `;
-      const mailToAdmin = {
-        from: 'SmileUp! Volunteer Page',
-        to: creds.USER,
-        subject: `New SmileUp! Volunteer: ${firstName} ${lastName}`,
-        html: adminMailContent,
-      };
-      const mailToVolunteer = {
-        from: 'SmileUp!',
-        to: email,
-        subject: `SmileUp! welcomes you!`,
-        html: volunteerMailContent,
-      };
-      transporter.sendMail(mailToAdmin, (err, data) => {
+      // const mailToAdmin = {
+      //   from: 'SmileUp! Volunteer Page',
+      //   to: creds.USER,
+      //   subject: `New SmileUp! Volunteer: ${firstName} ${lastName}`,
+      //   html: adminMailContent,
+      // };
+      // const mailToVolunteer = {
+      //   from: 'SmileUp!',
+      //   to: email,
+      //   subject: `SmileUp! welcomes you!`,
+      //   html: volunteerMailContent,
+      // };
+      const ejsObjectAdmin = {
+        name: `${firstName} ${lastName}`,
+        birthday,
+        email,
+        phone,
+        message,
+      }
+      ejs.renderFile(__dirname + '/adminEmail.ejs', ejsObjectAdmin, (err, data) => {
         if (err) {
-          res.json({
-            msg: 'mailToAdminFail',
-          });
+          console.log(err);
         } else {
-          transporter.sendMail(mailToVolunteer, (err2, data) => {
+          const mailToAdmin = {
+            from: 'SmileUp! Volunteer Page',
+            to: creds.USER,
+            subject: `New SmileUp! Volunteer: ${firstName} ${lastName}`,
+            html: data,
+          };
+          transporter.sendMail(mailToAdmin, (err2) => {
             if (err2) {
               res.json({
-                msg: 'mailToVolunteerFail',
+                msg: 'mailToAdminFail',
               });
             } else {
-              res.json({
-                msg: 'msgToAdminVolunteerSignUpSuccess',
-              });
+              ejs.renderFile(__dirname + '/volunteerEmail.ejs', {}, (err3, data) => {
+                if (err3) {
+                  console.log(err3);
+                } else {
+                  const mailToVolunteer = {
+                    from: 'SmileUp!',
+                    to: email,
+                    subject: `SmileUp! welcomes you!`,
+                    html: data,
+                  };
+                  transporter.sendMail(mailToVolunteer, (err4) => {
+                    if (err4) {
+                      res.json({
+                        msg: 'mailToVolunteerFail',
+                      });
+                    } else {
+                      res.json({
+                        msg: 'msgToAdminVolunteerSignUpSuccess',
+                      });
+                    }
+                  });
+                }
+              })
             }
           });
         }
-      });
+      })
+      
       console.log('You made it past the first res?');
       res.json({
         msg: 'signUpVolunteerSuccess',
