@@ -8,6 +8,30 @@ const config = require('../config/config');
 const connection = mysql.createConnection(config);
 connection.connect();
 
+// Nodemailer
+const ejs = require('ejs');
+const moment = require('moment');
+const nodemailer = require('nodemailer');
+const creds = require('../config/mail');
+
+const transport = {
+  host: 'smtp.gmail.com',
+  auth: {
+    user: creds.USER,
+    pass: creds.PASS,
+  },
+};
+
+const transporter = nodemailer.createTransport(transport);
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Server is ready to take messages');
+  }
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log('You hit it /!!');
@@ -45,6 +69,59 @@ router.post('/signup', function(req, res) {
     if (error) {
       throw error;
     } else {
+      const formattedBirthday = moment.utc(birthday).format('LL');
+      const ejsObjectAdmin = {
+        name: `${firstName} ${lastName}`,
+        formattedBirthday,
+        email,
+        phone,
+        message,
+      }
+      ejs.renderFile(__dirname + '/adminEmail.ejs', ejsObjectAdmin, (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          const mailToAdmin = {
+            from: 'SmileUp! Volunteer Page',
+            to: creds.USER,
+            subject: `New SmileUp! Volunteer: ${firstName} ${lastName}`,
+            html: data,
+          };
+          transporter.sendMail(mailToAdmin, (err2) => {
+            if (err2) {
+              res.json({
+                msg: 'mailToAdminFail',
+              });
+            } else {
+              ejs.renderFile(__dirname + '/volunteerEmail.ejs', {}, (err3, data) => {
+                if (err3) {
+                  console.log(err3);
+                } else {
+                  const mailToVolunteer = {
+                    from: 'SmileUp!',
+                    to: email,
+                    subject: `SmileUp! welcomes you!`,
+                    html: data,
+                  };
+                  transporter.sendMail(mailToVolunteer, (err4) => {
+                    if (err4) {
+                      res.json({
+                        msg: 'mailToVolunteerFail',
+                      });
+                    } else {
+                      res.json({
+                        msg: 'msgToAdminVolunteerSignUpSuccess',
+                      });
+                    }
+                  });
+                }
+              })
+            }
+          });
+        }
+      })
+      
+      console.log('You made it past the first res?');
       res.json({
         msg: 'signUpVolunteerSuccess',
       });
