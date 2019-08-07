@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+// import { makeStyles } from '@material-ui/styles';
+// import { KeyboardDatePicker } from '@material-ui/pickers';
+// import {  } from '@material-ui/core/styles';
 import moment from 'moment';
 
 import { emailCheck } from '../utilities';
 import SignUpAction from '../actions/SignUpAction';
 import { teal } from '../utilities';
+// import { DatePicker } from '@material-ui/pickers';
 
 const inputLabelProps = {
   shrink: true,
@@ -16,7 +20,7 @@ class SignUp extends Component {
   state = {
     firstName: '',
     lastName: '',
-    birthday: '',
+    birthday: this.hasDatePicker() ? '' : moment().subtract(15, 'years').calendar(),
     email: '',
     phone: '',
     zip: '',
@@ -24,6 +28,15 @@ class SignUp extends Component {
     school: '',
     message: '',
     showChildFields: false,
+  }
+  componentDidMount() {
+    this.hasDatePicker();
+  }
+  hasDatePicker() {
+    var input = document.createElement('input');
+    input.setAttribute('type', 'date');
+    input.value = '2018-01-01';
+    return !!input.valueAsDate;
   }
   handleFieldChange(event, field) {
     const { value } = event.target;
@@ -55,7 +68,7 @@ class SignUp extends Component {
   getParentFields() {
     if (this.state.showChildFields) {
       return (
-        <div>
+        <div id='guardian-fields'>
           <TextField
             style={{marginRight: 10}}
             variant='outlined'
@@ -115,7 +128,8 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'birthday')}
-                type='date'
+                value={this.state.birthday}
+                type={this.hasDatePicker() ? 'date' : null}
                 label='Birthday'
                 InputLabelProps={inputLabelProps}
               />
