@@ -90,7 +90,7 @@ class Navbar extends Component {
             <Link to='/' onClick={this.state.scrollToBottom} style={styles.links}>Contact Us</Link>
           </MediaQuery>
           <MediaQuery query='(max-width:1223px)'>
-            <Menu disableAutoFocus right pageWrapId='page-wrap' outerContainerId='App'>
+            <Menu width={ 200 } disableAutoFocus right pageWrapId='page-wrap' outerContainerId='App'>
               <Link className='menu-item' to='/about'>About</Link>
               <Link className='menu-item' to='/events'>Events</Link>
               <Link className='menu-item' to='/donate'>Donate</Link>
