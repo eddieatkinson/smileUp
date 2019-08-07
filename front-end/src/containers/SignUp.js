@@ -41,13 +41,8 @@ class SignUp extends Component {
   }
   handleFieldChange(event, field) {
     const { value } = event.target;
-    console.log(`${field} is changing to ${value}`);
     if (field === 'birthday') {
       if (!this.state.hasDatePicker && !value.match(dateCheck)) {
-        // value = moment(value, 'MM-DD-YYYY').format('YYYY-MM-DD');
-        console.log(value);
-        console.log(this.state);
-        console.log('bad birthday');
         this.setState({
           dateError: true,
         });
@@ -61,7 +56,6 @@ class SignUp extends Component {
         this.addParentSchoolFields(valueToTest);
       }
     }
-    console.log(value);
     this.setState({
       [field]: value,
     });
@@ -94,6 +88,20 @@ class SignUp extends Component {
         alertMessage = 'You have signed up successfully! Thank you so much!';
       }
       alert(alertMessage);
+      this.setState({
+        firstName: '',
+        lastName: '',
+        birthday: this.hasDatePicker() ? '' : moment().subtract(18, 'years').calendar(),
+        email: '',
+        phone: '',
+        zip: '',
+        guardianName: '',
+        school: '',
+        message: '',
+        showChildFields: false,
+        dateError: false,
+        hasDatePicker: this.hasDatePicker(),
+      });
     }
   }
   getParentFields() {
@@ -105,6 +113,7 @@ class SignUp extends Component {
             variant='outlined'
             margin='normal'
             onChange={(event) => this.handleFieldChange(event, 'guardianName')}
+            value={this.state.guardianName}
             type='text'
             label='Guardian Name'
             InputLabelProps={inputLabelProps}
@@ -114,6 +123,7 @@ class SignUp extends Component {
             variant='outlined'
             margin='normal'
             onChange={(event) => this.handleFieldChange(event, 'school')}
+            value={this.state.school}
             type='text'
             label='School'
             InputLabelProps={inputLabelProps}
@@ -124,8 +134,6 @@ class SignUp extends Component {
     return null;
   }
   render() {
-    console.log(this.props.volunteerInfo);
-    console.log(isEmpty(this.props.volunteerInfo));
     return (
       <div className='text-block'>
         <div style={{fontFamily: 'Quicksand'}}>
@@ -146,6 +154,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'firstName')}
+                value={this.state.firstName}
                 type='text'
                 label='First Name'
                 InputLabelProps={inputLabelProps}
@@ -154,6 +163,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'lastName')}
+                value={this.state.lastName}
                 type='text'
                 label='Last Name'
                 InputLabelProps={inputLabelProps}
@@ -173,6 +183,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'email')}
+                value={this.state.email}
                 type='email'
                 label='Email'
                 InputLabelProps={inputLabelProps}
@@ -182,6 +193,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'phone')}
+                value={this.state.phone}
                 type='tel'
                 label='Phone'
                 InputLabelProps={inputLabelProps}
@@ -190,6 +202,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'zip')}
+                value={this.state.zip}
                 type='text'
                 label='Zip code'
                 InputLabelProps={inputLabelProps}
@@ -198,6 +211,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'message')}
+                value={this.state.message}
                 type='text'
                 label='Message'
                 InputLabelProps={inputLabelProps}

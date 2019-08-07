@@ -8,7 +8,6 @@ export default function(input) {
     method: 'POST',
     data: input,
   });
-  console.log(axiosPromise);
   return {
     type: SIGN_UP_ACTION,
     payload: axiosPromise,
