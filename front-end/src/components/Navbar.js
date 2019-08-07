@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { teal, yellow, signInSuccess } from '../utilities';
+import { yellow, signInSuccess } from '../utilities';
 import Grid from '@material-ui/core/Grid';
 import { isEmpty } from 'lodash';
 import MediaQuery from 'react-responsive';
-import Reorder from '@material-ui/icons/Reorder';
 import { slide as Menu } from 'react-burger-menu';
 
 import logo from '../assets/logo.gif';
@@ -40,12 +39,6 @@ const styles = {
   image: {
     height: 60,
   },
-}
-
-const getImage = () => {
-  return (
-      <Reorder style={{fontSize: 60, color: teal}} />
-  )
 }
 
 class Navbar extends Component {
@@ -85,32 +78,6 @@ class Navbar extends Component {
         text: 'Sponsor',
       },
     ]
-    const dropdownItemsSmall = [
-      {
-        path: '/about',
-        text: 'About Us',
-      },
-      {
-        path: '/events',
-        text: 'Events',
-      },
-      {
-        path: '/donate',
-        text: 'Donate',
-      },
-      {
-        path: '/signup',
-        text: 'Volunteer',
-      },
-      {
-        path: '/sponsor',
-        text: 'Sponsor',
-      },
-      {
-        path: '/testimonials',
-        text: 'Testimonials',
-      },
-    ]
     if(isEmpty(auth) || auth.msg !== signInSuccess) {
       return (
         <div style={styles.container}>
@@ -123,8 +90,6 @@ class Navbar extends Component {
             <Link to='/' onClick={this.state.scrollToBottom} style={styles.links}>Contact Us</Link>
           </MediaQuery>
           <MediaQuery query='(max-width:1223px)'>
-            {/* <Dropdown image={getImage()} dropdownItems={dropdownItemsSmall} /> */}
-            {/* <Reorder onClick={this.changeMenuState} style={{fontSize: 60, color: teal}} /> */}
             <Menu disableAutoFocus right pageWrapId='page-wrap' outerContainerId='App'>
               <Link className='menu-item' to='/about'>About</Link>
               <Link className='menu-item' to='/events'>Events</Link>

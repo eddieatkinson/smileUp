@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
+import { isEmpty } from 'lodash';
 
-import { emailCheck } from '../utilities';
+import { emailCheck, dateCheck } from '../utilities';
 import SignUpAction from '../actions/SignUpAction';
 import { teal } from '../utilities';
 
@@ -16,7 +17,7 @@ class SignUp extends Component {
   state = {
     firstName: '',
     lastName: '',
-    birthday: '',
+    birthday: this.hasDatePicker() ? '' : moment().subtract(18, 'years').calendar(),
     email: '',
     phone: '',
     zip: '',
@@ -24,15 +25,40 @@ class SignUp extends Component {
     school: '',
     message: '',
     showChildFields: false,
+    dateError: false,
+    hasDatePicker: false,
+  }
+  componentDidMount() {
+    this.setState({
+      hasDatePicker: this.hasDatePicker(),
+    });
+  }
+  hasDatePicker() {
+    var input = document.createElement('input');
+    input.setAttribute('type', 'date');
+    input.value = '2018-01-01';
+    return !!input.valueAsDate;
   }
   handleFieldChange(event, field) {
     const { value } = event.target;
+    if (field === 'birthday') {
+      if (!this.state.hasDatePicker && !value.match(dateCheck)) {
+        this.setState({
+          dateError: true,
+        });
+      } else {
+        if (this.state.dateError) {
+          this.setState({
+            dateError: false,
+          });
+        }
+        const valueToTest = this.state.hasDatePicker ? value : moment(value, 'MM-DD-YYYY').format('YYYY-MM-DD');
+        this.addParentSchoolFields(valueToTest);
+      }
+    }
     this.setState({
       [field]: value,
     });
-    if (field === 'birthday') {
-      this.addParentSchoolFields(value);
-    }
   }
   addParentSchoolFields(birthday) {
     const age = moment().diff(birthday, 'years');
@@ -41,34 +67,63 @@ class SignUp extends Component {
       showChildFields,
     });
   }
-  handleSubmit(event) {
+  async handleSubmit(event) {
     const { firstName, lastName, birthday, email, zip } = this.state;
     event.preventDefault();
     if (firstName === '' || lastName === '' || birthday === '' || zip === '') {
       alert('First name, last name, birthday, and zip are required.');
     } else if (!email.match(emailCheck)) {
       alert('Please enter a valid email.');
+    } else if (this.state.dateError) {
+      alert('Please enter a birthdate in the format: "MM/DD/YYYY"');
     } else {
-      this.props.SignUpAction(this.state);
+      if (!this.state.hasDatePicker) {
+        await this.setState({
+          birthday: moment(birthday, 'MM-DD-YYYY').format('YYYY-MM-DD'),
+        });
+      }
+      await this.props.SignUpAction(this.state);
+      let alertMessage = 'There was an error in your submission. Please try again :)'
+      if (!isEmpty(this.props.volunteerInfo) && this.props.volunteerInfo.msg === 'signUpVolunteerSuccess') {
+        alertMessage = 'You have signed up successfully! Thank you so much!';
+      }
+      alert(alertMessage);
+      this.setState({
+        firstName: '',
+        lastName: '',
+        birthday: this.hasDatePicker() ? '' : moment().subtract(18, 'years').calendar(),
+        email: '',
+        phone: '',
+        zip: '',
+        guardianName: '',
+        school: '',
+        message: '',
+        showChildFields: false,
+        dateError: false,
+        hasDatePicker: this.hasDatePicker(),
+      });
     }
   }
   getParentFields() {
     if (this.state.showChildFields) {
       return (
-        <div>
+        <div id='guardian-fields'>
           <TextField
-            style={{marginRight: 10}}
+            style={{marginRight: 10, width: 195}}
             variant='outlined'
             margin='normal'
             onChange={(event) => this.handleFieldChange(event, 'guardianName')}
+            value={this.state.guardianName}
             type='text'
             label='Guardian Name'
             InputLabelProps={inputLabelProps}
           />
           <TextField
+            style={{width: 195}}
             variant='outlined'
             margin='normal'
             onChange={(event) => this.handleFieldChange(event, 'school')}
+            value={this.state.school}
             type='text'
             label='School'
             InputLabelProps={inputLabelProps}
@@ -99,6 +154,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'firstName')}
+                value={this.state.firstName}
                 type='text'
                 label='First Name'
                 InputLabelProps={inputLabelProps}
@@ -107,14 +163,18 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'lastName')}
+                value={this.state.lastName}
                 type='text'
                 label='Last Name'
                 InputLabelProps={inputLabelProps}
               />
               <TextField
+                error={this.state.dateError}
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'birthday')}
+                // value={moment(this.state.birthday, 'YYYY-MM-DD').format('L')}
+                value={this.state.birthday}
                 type='date'
                 label='Birthday'
                 InputLabelProps={inputLabelProps}
@@ -123,6 +183,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'email')}
+                value={this.state.email}
                 type='email'
                 label='Email'
                 InputLabelProps={inputLabelProps}
@@ -132,6 +193,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'phone')}
+                value={this.state.phone}
                 type='tel'
                 label='Phone'
                 InputLabelProps={inputLabelProps}
@@ -140,6 +202,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'zip')}
+                value={this.state.zip}
                 type='text'
                 label='Zip code'
                 InputLabelProps={inputLabelProps}
@@ -148,6 +211,7 @@ class SignUp extends Component {
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'message')}
+                value={this.state.message}
                 type='text'
                 label='Message'
                 InputLabelProps={inputLabelProps}
@@ -175,6 +239,12 @@ class SignUp extends Component {
   }
 }
 
-export default connect(null, {
+const mapStateToProps = state => {
+  return {
+    volunteerInfo: state.volunteerInfo,
+  }
+}
+
+export default connect(mapStateToProps, {
   SignUpAction,
 })(SignUp);
