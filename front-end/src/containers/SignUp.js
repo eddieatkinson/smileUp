@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-// import { makeStyles } from '@material-ui/styles';
-// import { KeyboardDatePicker } from '@material-ui/pickers';
-// import {  } from '@material-ui/core/styles';
 import moment from 'moment';
+import { isEmpty } from 'lodash';
 
 import { emailCheck, dateCheck } from '../utilities';
 import SignUpAction from '../actions/SignUpAction';
 import { teal } from '../utilities';
-// import { DatePicker } from '@material-ui/pickers';
 
 const inputLabelProps = {
   shrink: true,
@@ -76,15 +73,27 @@ class SignUp extends Component {
       showChildFields,
     });
   }
-  handleSubmit(event) {
+  async handleSubmit(event) {
     const { firstName, lastName, birthday, email, zip } = this.state;
     event.preventDefault();
     if (firstName === '' || lastName === '' || birthday === '' || zip === '') {
       alert('First name, last name, birthday, and zip are required.');
     } else if (!email.match(emailCheck)) {
       alert('Please enter a valid email.');
+    } else if (this.state.dateError) {
+      alert('Please enter a birthdate in the format: "MM/DD/YYYY"');
     } else {
-      this.props.SignUpAction(this.state);
+      if (!this.state.hasDatePicker) {
+        await this.setState({
+          birthday: moment(birthday, 'MM-DD-YYYY').format('YYYY-MM-DD'),
+        });
+      }
+      await this.props.SignUpAction(this.state);
+      let alertMessage = 'There was an error in your submission. Please try again :)'
+      if (!isEmpty(this.props.volunteerInfo) && this.props.volunteerInfo.msg === 'signUpVolunteerSuccess') {
+        alertMessage = 'You have signed up successfully! Thank you so much!';
+      }
+      alert(alertMessage);
     }
   }
   getParentFields() {
@@ -115,7 +124,8 @@ class SignUp extends Component {
     return null;
   }
   render() {
-    console.log(this.state);
+    console.log(this.props.volunteerInfo);
+    console.log(isEmpty(this.props.volunteerInfo));
     return (
       <div className='text-block'>
         <div style={{fontFamily: 'Quicksand'}}>
@@ -215,6 +225,12 @@ class SignUp extends Component {
   }
 }
 
-export default connect(null, {
+const mapStateToProps = state => {
+  return {
+    volunteerInfo: state.volunteerInfo,
+  }
+}
+
+export default connect(mapStateToProps, {
   SignUpAction,
 })(SignUp);

@@ -108,10 +108,6 @@ router.post('/signup', function(req, res) {
                       res.json({
                         msg: 'mailToVolunteerFail',
                       });
-                    } else {
-                      res.json({
-                        msg: 'msgToAdminVolunteerSignUpSuccess',
-                      });
                     }
                   });
                 }
@@ -119,9 +115,7 @@ router.post('/signup', function(req, res) {
             }
           });
         }
-      })
-      
-      console.log('You made it past the first res?');
+      });
       res.json({
         msg: 'signUpVolunteerSuccess',
       });
