@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 // import {  } from '@material-ui/core/styles';
 import moment from 'moment';
 
-import { emailCheck } from '../utilities';
+import { emailCheck, dateCheck } from '../utilities';
 import SignUpAction from '../actions/SignUpAction';
 import { teal } from '../utilities';
 // import { DatePicker } from '@material-ui/pickers';
@@ -20,7 +20,7 @@ class SignUp extends Component {
   state = {
     firstName: '',
     lastName: '',
-    birthday: this.hasDatePicker() ? '' : moment().subtract(15, 'years').calendar(),
+    birthday: this.hasDatePicker() ? '' : moment().subtract(18, 'years').calendar(),
     email: '',
     phone: '',
     zip: '',
@@ -28,9 +28,13 @@ class SignUp extends Component {
     school: '',
     message: '',
     showChildFields: false,
+    dateError: false,
+    hasDatePicker: false,
   }
   componentDidMount() {
-    this.hasDatePicker();
+    this.setState({
+      hasDatePicker: this.hasDatePicker(),
+    });
   }
   hasDatePicker() {
     var input = document.createElement('input');
@@ -40,12 +44,30 @@ class SignUp extends Component {
   }
   handleFieldChange(event, field) {
     const { value } = event.target;
+    console.log(`${field} is changing to ${value}`);
+    if (field === 'birthday') {
+      if (!this.state.hasDatePicker && !value.match(dateCheck)) {
+        // value = moment(value, 'MM-DD-YYYY').format('YYYY-MM-DD');
+        console.log(value);
+        console.log(this.state);
+        console.log('bad birthday');
+        this.setState({
+          dateError: true,
+        });
+      } else {
+        if (this.state.dateError) {
+          this.setState({
+            dateError: false,
+          });
+        }
+        const valueToTest = this.state.hasDatePicker ? value : moment(value, 'MM-DD-YYYY').format('YYYY-MM-DD');
+        this.addParentSchoolFields(valueToTest);
+      }
+    }
+    console.log(value);
     this.setState({
       [field]: value,
     });
-    if (field === 'birthday') {
-      this.addParentSchoolFields(value);
-    }
   }
   addParentSchoolFields(birthday) {
     const age = moment().diff(birthday, 'years');
@@ -70,7 +92,7 @@ class SignUp extends Component {
       return (
         <div id='guardian-fields'>
           <TextField
-            style={{marginRight: 10}}
+            style={{marginRight: 10, width: 195}}
             variant='outlined'
             margin='normal'
             onChange={(event) => this.handleFieldChange(event, 'guardianName')}
@@ -79,6 +101,7 @@ class SignUp extends Component {
             InputLabelProps={inputLabelProps}
           />
           <TextField
+            style={{width: 195}}
             variant='outlined'
             margin='normal'
             onChange={(event) => this.handleFieldChange(event, 'school')}
@@ -92,6 +115,7 @@ class SignUp extends Component {
     return null;
   }
   render() {
+    console.log(this.state);
     return (
       <div className='text-block'>
         <div style={{fontFamily: 'Quicksand'}}>
@@ -125,11 +149,13 @@ class SignUp extends Component {
                 InputLabelProps={inputLabelProps}
               />
               <TextField
+                error={this.state.dateError}
                 variant='outlined'
                 margin='normal'
                 onChange={(event) => this.handleFieldChange(event, 'birthday')}
+                // value={moment(this.state.birthday, 'YYYY-MM-DD').format('L')}
                 value={this.state.birthday}
-                type={this.hasDatePicker() ? 'date' : null}
+                type='date'
                 label='Birthday'
                 InputLabelProps={inputLabelProps}
               />

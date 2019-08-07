@@ -209,6 +209,9 @@ p {
     margin-right: 0px !important;
     width: 48%;
   }
+  #guardian-fields > div {
+    width: 48% !important;
+  }
   .volunteer-form > form > div:nth-last-child(2) {
     width: 96%;
   }
