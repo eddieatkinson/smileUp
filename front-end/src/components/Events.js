@@ -29,7 +29,7 @@ function Events() {
       </div>
       <div className='past-events'>
         <div className='text-block'>
-          <a href='https://www.facebook.com/pg/smileupfoundation/photos/?tab=albums' target='_blank' rel="noopener noreferrer"><h1>Past SmileUp! Events</h1> <span className='past-photos' >(click here to see photos)</span></a>
+          <a href='https://www.facebook.com/pg/smileupfoundation/photos/?tab=albums' target='_blank' rel="noopener noreferrer"><h1>Past SmileUp! Events <span className='past-photos'>(click here to see photos)</span></h1></a>
         </div>
       </div>
     </div>
