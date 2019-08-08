@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { emailCheck, badLogin, teal, badPassword, signInSuccess } from '../utilities';
 import SignInAction from '../actions/SignInAction';
@@ -16,6 +17,8 @@ class SignIn extends Component {
     email: '',
     password: '',
     staySignedIn: false,
+    isLoading: false,
+    apiError: false,
   }
   handleRadioButtonCheck() {
     document.getElementById('keepSignedOn').checked = !this.state.staySignedIn;
@@ -41,9 +44,17 @@ class SignIn extends Component {
     } else if (!email.match(emailCheck)) {
       alert('Please enter a valid email.');
     } else {
+      this.setState({
+        isLoading: true,
+      });
       await this.props.SignInAction(this.state);
       if (this.props.auth.msg === signInSuccess) {
         this.props.history.push('/volunteers');
+      } else {
+        this.setState({
+          isLoading: false,
+          apiError: true,
+        });
       }
       if (staySignedIn) {
         this.storeToken();
@@ -52,6 +63,9 @@ class SignIn extends Component {
   }
   renderErrorMessage() {
     let errorMessage = '';
+    if(this.state.apiError) {;
+      errorMessage = 'There was a problem with your login. Please try again later :)';
+    }
     if(this.props.auth) {
       if (this.props.auth.msg === badPassword) {
         errorMessage = 'Incorrect password';
@@ -60,6 +74,16 @@ class SignIn extends Component {
       }
     }
     return errorMessage;
+  }
+  renderProgressSpinner() {
+    if (this.state.isLoading) {
+      return (
+        <div className='spinner-container'>
+          <CircularProgress className='spinner' />
+        </div>
+      )
+    }
+    return null;
   }
   render() {
     return (
@@ -99,6 +123,7 @@ class SignIn extends Component {
             Sign me in!
           </Button>
         </form>
+        {this.renderProgressSpinner()}
       </div>
     )
   }
