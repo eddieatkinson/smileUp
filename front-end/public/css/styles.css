@@ -306,6 +306,26 @@ p {
   margin: 0 20px;
 }
 
+.past-events {
+  background-color: #ffcc0080;
+  overflow: auto;
+}
+
+.past-events h1 {
+  color: #009999;
+  /* display: inline; */
+}
+
+.past-events a {
+  text-decoration: none;
+}
+
+.past-photos {
+  font-size: 20px;
+  font-style: italic;
+  color: black;
+}
+
 @media only screen and (max-width: 1223px) {
   .events-container h1, .event * {
     text-align: center;
@@ -315,6 +335,9 @@ p {
   }
   .event {
     margin-bottom: 50px;
+  }
+  .past-photos {
+    display: block;
   }
 }
 
@@ -331,25 +354,6 @@ p {
 .event-link {
   text-decoration: none;
   color: #009999;
-}
-
-.past-events {
-  background-color: #ffcc0080;
-  overflow: auto;
-}
-
-.past-events h1 {
-  color: #009999;
-}
-
-.past-events a {
-  text-decoration: none;
-}
-
-.past-photos {
-  font-size: 20px;
-  font-style: italic;
-  color: black;
 }
 
 /* Sponsor */
