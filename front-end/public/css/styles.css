@@ -527,6 +527,14 @@ p {
   margin-right: 50px;
 }
 
+.spinner-container {
+  text-align: center;
+}
+
+.spinner {
+  color: #009999 !important;
+}
+
 /* Burger-menu */
 .bm-menu-wrap {
   top: 0px;
