@@ -10,13 +10,18 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import Delete from "@material-ui/icons/Delete";
-import { isEmpty } from "lodash";
+import { isEmpty, find } from "lodash";
 
 import GetVolunteerInfo from "../actions/GetVolunteerInfo";
 import DeleteVolunteerAction from "../actions/DeleteVolunteerAction";
 import { signInSuccess } from "../utilities";
+import IndVolunteerInfo from "./IndVolunteerInfo";
 
 class VolunteerTable extends Component {
+  // state = {
+  //   selectedVolunteerId: 0
+  // };
+
   componentDidMount() {
     this.props.GetVolunteerInfo();
   }
@@ -25,11 +30,31 @@ class VolunteerTable extends Component {
     this.props.DeleteVolunteerAction({ id });
   }
 
+  selectVolunteer(selectedVolunteerId) {
+    const volunteerInfo = find(this.props.volunteerInfo, [
+      "id",
+      selectedVolunteerId
+    ]);
+    this.props.history.push({
+      pathname: `/volunteers/${volunteerInfo.firstName}${volunteerInfo.lastName}`,
+      state: { volunteerInfo }
+    });
+  }
+
   renderTable() {
-    if (isEmpty(this.props.auth) || this.props.auth.msg !== signInSuccess) {
-      this.props.history.push("/");
-      return null;
-    }
+    // if (isEmpty(this.props.auth) || this.props.auth.msg !== signInSuccess) {
+    //   this.props.history.push("/");
+    //   return null;
+    // }
+    // if (this.state.selectedVolunteerId) {
+    //   const volunteerInfo = find(this.props.volunteerInfo, [
+    //     "id",
+    //     this.state.selectedVolunteerId
+    //   ]);
+    //   this.props.history.push("/volunteers/hey");
+    //   // return <IndVolunteerInfo volunteerInfo={volunteerInfo} />;
+    //   return;
+    // }
 
     return (
       <div className="volunteer-table-wrapper">
@@ -55,7 +80,11 @@ class VolunteerTable extends Component {
                     .format("LL");
                   const age = moment().diff(volunteer.birthday, "years");
                   return (
-                    <TableRow key={volunteer.id}>
+                    <TableRow
+                      key={volunteer.id}
+                      hover
+                      onClick={() => this.selectVolunteer(volunteer.id)}
+                    >
                       <TableCell>{volunteer.firstName}</TableCell>
                       <TableCell>{volunteer.lastName}</TableCell>
                       <TableCell>{birthdayFormatted}</TableCell>
@@ -80,7 +109,12 @@ class VolunteerTable extends Component {
     );
   }
 
+  renderVolunteerInfo() {
+    return <div></div>;
+  }
+
   render() {
+    console.log(this.props.volunteerInfo);
     return <div>{this.renderTable()}</div>;
   }
 }
