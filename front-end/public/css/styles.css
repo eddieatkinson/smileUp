@@ -234,6 +234,30 @@ p {
   }
 }
 
+/* Individual Volunteer Info */
+.volunteer-info {
+  padding: 2rem;
+  width: 70%;
+  margin: auto;
+}
+.volunteer-info form {
+  text-align: center;
+}
+.volunteer-info form > div {
+  width: 40%;
+}
+@media only screen and (max-width: 1223px) {
+  .volunteer-info form > div,
+  .volunteer-info form > div:nth-last-child(2) {
+    /* margin-right: 0px !important; */
+    width: 48%;
+  }
+}
+#edit-volunteer-button,
+#edit-volunteer-button > button {
+  margin: 2rem auto;
+}
+
 /* Testimonials */
 .group-pic-container {
   height: 432px;
