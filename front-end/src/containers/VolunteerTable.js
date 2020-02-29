@@ -18,15 +18,14 @@ import { signInSuccess } from "../utilities";
 import IndVolunteerInfo from "./IndVolunteerInfo";
 
 class VolunteerTable extends Component {
-  // state = {
-  //   selectedVolunteerId: 0
-  // };
-
   componentDidMount() {
     this.props.GetVolunteerInfo();
   }
 
-  deleteVolunteer(id) {
+  deleteVolunteer(e, id) {
+    e = e || window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
     this.props.DeleteVolunteerAction({ id });
   }
 
@@ -42,20 +41,6 @@ class VolunteerTable extends Component {
   }
 
   renderTable() {
-    // if (isEmpty(this.props.auth) || this.props.auth.msg !== signInSuccess) {
-    //   this.props.history.push("/");
-    //   return null;
-    // }
-    // if (this.state.selectedVolunteerId) {
-    //   const volunteerInfo = find(this.props.volunteerInfo, [
-    //     "id",
-    //     this.state.selectedVolunteerId
-    //   ]);
-    //   this.props.history.push("/volunteers/hey");
-    //   // return <IndVolunteerInfo volunteerInfo={volunteerInfo} />;
-    //   return;
-    // }
-
     return (
       <div className="volunteer-table-wrapper">
         <div className="volunteer-table">
@@ -95,7 +80,7 @@ class VolunteerTable extends Component {
                       <TableCell>
                         <Delete
                           className="delete-volunteer"
-                          onClick={() => this.deleteVolunteer(volunteer.id)}
+                          onClick={e => this.deleteVolunteer(e, volunteer.id)}
                         />
                       </TableCell>
                     </TableRow>
