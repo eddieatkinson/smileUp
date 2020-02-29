@@ -114,7 +114,6 @@ class VolunteerTable extends Component {
   }
 
   render() {
-    console.log(this.props.volunteerInfo);
     return <div>{this.renderTable()}</div>;
   }
 }
@@ -122,7 +121,7 @@ class VolunteerTable extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
-    volunteerInfo: state.volunteerInfo
+    volunteerInfo: state.volunteerInfo.volunteerInfo
   };
 };
 

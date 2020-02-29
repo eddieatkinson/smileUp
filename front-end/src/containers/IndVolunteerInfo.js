@@ -1,11 +1,15 @@
 import React, { Component } from "react";
+import moment from "moment";
+import { connect } from "react-redux";
+import UpdateVolunteerAction from "../actions/UpdateVolunteerAction";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import moment from "moment";
-import { teal } from "../utilities";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { teal, updateSuccessful } from "../utilities";
 
 class IndVolunteerInfo extends Component {
   state = {
+    id: this.props.location.state.volunteerInfo.id || null,
     firstName: this.props.location.state.volunteerInfo.firstName || "",
     lastName: this.props.location.state.volunteerInfo.lastName || "",
     birthday:
@@ -16,7 +20,8 @@ class IndVolunteerInfo extends Component {
     phone: this.props.location.state.volunteerInfo.phone || "",
     zip: this.props.location.state.volunteerInfo.zip || "",
     school: this.props.location.state.volunteerInfo.school || "",
-    hours: this.props.location.state.volunteerInfo.hours || 0
+    hours: this.props.location.state.volunteerInfo.hours || 0,
+    isLoading: false
   };
   handleFieldChange(event, field) {
     const { value } = event.target;
@@ -24,93 +29,36 @@ class IndVolunteerInfo extends Component {
       [field]: value
     });
   }
+  async handleSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      isLoading: true
+    });
+    await this.props.UpdateVolunteerAction(this.state);
+    if (this.props.msg === updateSuccessful) {
+      this.props.history.push("/volunteers");
+    } else {
+      alert("An error occurred");
+      this.setState({
+        isLoading: false
+      });
+    }
+  }
+  renderProgressSpinner() {
+    if (this.state.isLoading) {
+      return (
+        <div className="spinner-container">
+          <CircularProgress className="spinner" />
+        </div>
+      );
+    }
+    return null;
+  }
   render() {
     const inputLabelProps = {
       shrink: true
     };
-    console.log(this.state.birthday);
     return (
-      // <form className="volunteerTable">
-      //   <label>
-      //     First Name:
-      //     <input
-      //       id="firstName"
-      //       type="text"
-      //       value={this.state.firstName}
-      //       onChange={e => this.changeInput(e.target)}
-      //     />
-      //   </label>
-      //   <br />
-      //   <label>
-      //     Last Name:
-      //     <input
-      //       id="lastName"
-      //       type="text"
-      //       value={this.state.lastName}
-      //       onChange={e => this.changeInput(e.target)}
-      //     />
-      //   </label>
-      //   <br />
-      //   <label>
-      //     Birthday:
-      //     <input
-      //       id="birthday"
-      //       type="date"
-      //       value={this.state.birthday}
-      //       onChange={e => this.changeInput(e.target)}
-      //     />
-      //   </label>
-      //   <br />
-      //   <label>
-      //     Email:
-      //     <input
-      //       id="email"
-      //       type="email"
-      //       value={this.state.email}
-      //       onChange={e => this.changeInput(e.target)}
-      //     />
-      //   </label>
-      //   <br />
-      //   <label>
-      //     Phone:
-      //     <input
-      //       id="phone"
-      //       type="phone"
-      //       value={this.state.phone}
-      //       onChange={e => this.changeInput(e.target)}
-      //     />
-      //   </label>
-      //   <br />
-      //   <label>
-      //     Zipe Code:
-      //     <input
-      //       id="zip"
-      //       type="number"
-      //       value={this.state.zip}
-      //       onChange={e => this.changeInput(e.target)}
-      //     />
-      //   </label>
-      //   <br />
-      //   <label>
-      //     School:
-      //     <input
-      //       id="school"
-      //       type="text"
-      //       value={this.state.school}
-      //       onChange={e => this.changeInput(e.target)}
-      //     />
-      //   </label>
-      //   <br />
-      //   <label>
-      //     Hours:
-      //     <input
-      //       id="hours"
-      //       type="number"
-      //       value={this.state.hours}
-      //       onChange={e => this.changeInput(e.target)}
-      //     />
-      //   </label>
-      // </form>
       <div className="volunteer-info">
         <div className="volunteer-form">
           <form>
@@ -192,12 +140,13 @@ class IndVolunteerInfo extends Component {
             <div id="edit-volunteer-button">
               <Button
                 style={{ backgroundColor: teal, color: "white" }}
-                // onClick={this.handleSubmit.bind(this)}
+                onClick={this.handleSubmit.bind(this)}
                 type="submit"
               >
                 Submit Changes
               </Button>
             </div>
+            {this.renderProgressSpinner()}
           </form>
         </div>
       </div>
@@ -205,4 +154,12 @@ class IndVolunteerInfo extends Component {
   }
 }
 
-export default IndVolunteerInfo;
+const mapStateToProps = state => {
+  return {
+    msg: state.volunteerInfo.msg
+  };
+};
+
+export default connect(mapStateToProps, {
+  UpdateVolunteerAction
+})(IndVolunteerInfo);
