@@ -246,10 +246,16 @@ p {
 .volunteer-info form > div {
   width: 40%;
 }
+.volunteer-form-ind > form > div {
+  margin-right: 10px;
+}
+.volunteer-form-ind > form > div:nth-last-child(2) {
+  width: 81%;
+}
 @media only screen and (max-width: 1223px) {
   .volunteer-info form > div,
   .volunteer-info form > div:nth-last-child(2) {
-    /* margin-right: 0px !important; */
+    margin-right: 0px !important;
     width: 48%;
   }
 }

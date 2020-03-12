@@ -238,14 +238,26 @@ router.post("/updatevolunteer", (req, res) => {
     phone,
     zip,
     school,
+    notes,
     hours
   } = req.body;
   const updateQuery = `UPDATE volunteers
-    SET firstName = ?, lastName = ?, birthday = ?, email = ?, phone = ?, zip = ?, school = ?, hours = ?
+    SET firstName = ?, lastName = ?, birthday = ?, email = ?, phone = ?, zip = ?, school = ?, hours = ?, notes = ?
     WHERE id = ?;`;
   connection.query(
     updateQuery,
-    [firstName, lastName, birthday, email, phone, zip, school, hours, id],
+    [
+      firstName,
+      lastName,
+      birthday,
+      email,
+      phone,
+      zip,
+      school,
+      hours,
+      notes,
+      id
+    ],
     error => {
       if (error) {
         throw error;
