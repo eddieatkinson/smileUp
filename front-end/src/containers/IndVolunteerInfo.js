@@ -21,6 +21,7 @@ class IndVolunteerInfo extends Component {
     zip: this.props.location.state.volunteerInfo.zip || "",
     school: this.props.location.state.volunteerInfo.school || "",
     hours: this.props.location.state.volunteerInfo.hours || 0,
+    notes: this.props.location.state.volunteerInfo.notes || "",
     isLoading: false
   };
   handleFieldChange(event, field) {
@@ -60,7 +61,7 @@ class IndVolunteerInfo extends Component {
     };
     return (
       <div className="volunteer-info">
-        <div className="volunteer-form">
+        <div className="volunteer-form-ind">
           <form>
             <TextField
               variant="outlined"
@@ -135,6 +136,16 @@ class IndVolunteerInfo extends Component {
               value={this.state.hours}
               type="number"
               label="Hours"
+              InputLabelProps={inputLabelProps}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              onChange={event => this.handleFieldChange(event, "notes")}
+              value={this.state.notes}
+              type="text"
+              multiline
+              label="Notes"
               InputLabelProps={inputLabelProps}
             />
             <div id="edit-volunteer-button">
